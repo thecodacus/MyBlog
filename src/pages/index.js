@@ -1,7 +1,10 @@
+// import { graphql } from "gatsby"
 import React from "react"
 import Layout from "../components/Layout"
 
 export default function Home() {
+	// console.log(data)
+	// const { title, description } = data.site.siteMetadata
 	return (
 		<Layout>
 			<section>
@@ -10,3 +13,14 @@ export default function Home() {
 		</Layout>
 	)
 }
+// export const query = graphql`
+// 	query SiteInfo {
+// 		site {
+// 			id
+// 			siteMetadata {
+// 				description
+// 				title
+// 			}
+// 		}
+// 	}
+// `

@@ -7,7 +7,9 @@
 module.exports = {
 	/* Your site config here */
 	plugins: [],
-	siteMetaData: {
-		title: "",
+	siteMetadata: {
+		title: "The Codacus",
+		description: "The Coding Abacus",
+		copyright: "Copyright 2021 The Codacus",
 	},
 }
