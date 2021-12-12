@@ -9,19 +9,18 @@ module.exports = {
 	plugins: [
 		"gatsby-transformer-sharp",
 		"gatsby-plugin-sharp",
-		"gatsby-plugin-netlify-cms",
+		// {
+		// 	resolve: `gatsby-source-filesystem`,
+		// 	options: {
+		// 		name: `images`,
+		// 		path: `${__dirname}/src/images/`,
+		// 	},
+		// },
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
-				name: `images`,
-				path: `${__dirname}/src/images/`,
-			},
-		},
-		{
-			resolve: `gatsby-source-filesystem`,
-			options: {
-				path: `${__dirname}/static/images/uploads/`,
-				name: "media",
+				path: `${__dirname}/static/assets/images/uploads`,
+				name: "uploads",
 			},
 		},
 		{
@@ -36,18 +35,9 @@ module.exports = {
 			options: {
 				plugins: [
 					{
-						resolve: `gatsby-remark-relative-images`,
+						resolve: "gatsby-remark-relative-images",
 						options: {
-							name: "media", // Must match the source name ^
-							// [Optional] The root of "media_folder" in your config.yml
-							// Defaults to "static"
-							staticFolderName: "static",
-							// [Optional] Include the following fields, use dot notation for nested fields
-							// All fields are included by default
-							include: ["featuredImage"],
-							// [Optional] Exclude the following fields, use dot notation for nested fields
-							// No fields are excluded by default
-							exclude: [],
+							name: "uploads", // Must match the source name ^
 						},
 					},
 					{
@@ -59,6 +49,7 @@ module.exports = {
 				],
 			},
 		},
+		"gatsby-plugin-netlify-cms",
 	],
 	siteMetadata: {
 		title: "The Codacus",

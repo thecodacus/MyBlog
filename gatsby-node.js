@@ -34,12 +34,8 @@ exports.createPages = async ({ graphql, actions }) => {
 // 	createTypes(typeDefs)
 // }
 
-// exports.onCreateNode = ({ node }) => {
-// 	if(node.internal.mediaType=="text/markdown"){
-//         createNodeField({
-//             node,
-//             name: `featuredImage`,
-//             value:
-//         })
-//     }
-// }
+const { fmImagesToRelative } = require("gatsby-remark-relative-images")
+
+exports.onCreateNode = ({ node }) => {
+	fmImagesToRelative(node)
+}
