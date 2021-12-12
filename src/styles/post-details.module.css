@@ -1,0 +1,12 @@
+.details {
+	min-width: 50vw;
+	max-width: 90vw;
+	align-items: center;
+	margin: auto;
+}
+
+.html {
+}
+.featured {
+	max-width: 500px;
+}
