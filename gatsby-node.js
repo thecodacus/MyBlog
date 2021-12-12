@@ -20,9 +20,26 @@ exports.createPages = async ({ graphql, actions }) => {
 		})
 	})
 }
-
-// const { fmImagesToRelative } = require("gatsby-remark-relative-images")
+// exports.createSchemaCustomization = ({ actions }) => {
+// 	const { createTypes } = actions
+// 	const typeDefs = `
+//         type MarkdownRemarkFrontmatter {
+//             title: String
+//             category: String
+//             slug: String
+//             date: Date @dateformat
+//             featuredImage: File @fileByRelativePath
+//         }
+//     `
+// 	createTypes(typeDefs)
+// }
 
 // exports.onCreateNode = ({ node }) => {
-// 	fmImagesToRelative(node)
+// 	if(node.internal.mediaType=="text/markdown"){
+//         createNodeField({
+//             node,
+//             name: `featuredImage`,
+//             value:
+//         })
+//     }
 // }
