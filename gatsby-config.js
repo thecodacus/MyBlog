@@ -7,7 +7,21 @@
 module.exports = {
 	/* Your site config here */
 	plugins: [
-		"gatsby-transformer-remark",
+		{
+			resolve: "gatsby-transformer-remark",
+			options: {
+				plugins: [
+					"gatsby-remark-relative-images",
+					{
+						resolve: `gatsby-remark-images`,
+						options: {
+							maxWidth: 590,
+						},
+					},
+				],
+			},
+		},
+
 		"gatsby-transformer-sharp",
 		"gatsby-plugin-sharp",
 		"gatsby-plugin-netlify-cms",
@@ -16,6 +30,13 @@ module.exports = {
 			options: {
 				name: `images`,
 				path: `${__dirname}/src/images/`,
+			},
+		},
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				path: `${__dirname}/static/uploads`,
+				name: "uploads",
 			},
 		},
 		{
