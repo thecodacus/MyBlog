@@ -10,6 +10,7 @@
 	border-radius: 1rem;
 	overflow: hidden;
 	position: relative;
+	border-style: none;
 
 	// shadow effect
 	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -67,18 +68,20 @@
 			font-weight: 700;
 		}
 		.readMore {
-			border-radius: 1.5rem;
+			border-radius: 1rem;
 			background-color: rgba(146, 43, 225, 1);
 			position: absolute;
+			border-style: none;
 			right: -2.5rem;
-			top: -0.5rem;
+			top: -0.2rem;
 			padding-bottom: 2rem;
-			padding-top: 0.9rem;
+			padding-top: 0.7rem;
 			padding-right: 2rem;
 			padding-left: 1rem;
 
-			font-size: 1rem;
+			font-size: 0.8rem;
 			font-weight: bold;
+			background: radial-gradient(at top left, rgba(146, 43, 225, 1) 0%, rgb(75, 21, 175) 100%);
 		}
 	}
 }
