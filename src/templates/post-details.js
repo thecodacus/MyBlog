@@ -15,7 +15,7 @@ export default function ProjectDetails({ data }) {
 				<h2>{title}</h2>
 				<h3>{category}</h3>
 				<div className={styles.featured}>
-					<GatsbyImage image={getImage(featuredImage)} />
+					<GatsbyImage image={getImage(featuredImage)} alt={title} />
 				</div>
 				<div className={styles.html} dangerouslySetInnerHTML={{ __html: html }}></div>
 			</div>
@@ -25,9 +25,12 @@ export default function ProjectDetails({ data }) {
 
 export const query = graphql`
 	query PostDetails($slug: String) {
-		markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+		markdownRemark(fields: { slug: { eq: $slug } }) {
 			id
 			html
+			fields {
+				slug
+			}
 			frontmatter {
 				date
 				slug

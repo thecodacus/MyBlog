@@ -12,9 +12,9 @@ export default function Posts({ data }) {
 				<div>Posts Works</div>
 				<div className={styles.posts}>
 					{posts.map(post => (
-						<Link to={"/posts/" + post.frontmatter.slug} key={post.id}>
+						<Link to={"/posts/" + post.fields.slug} key={post.id}>
 							<div>
-								<GatsbyImage image={getImage(post.frontmatter.featuredImage)} />
+								<GatsbyImage image={getImage(post.frontmatter.featuredImage)} alt={post.frontmatter.title} />
 								<h3>{post.frontmatter.title}</h3>
 								<p>{post.frontmatter.category}</p>
 							</div>
@@ -30,6 +30,9 @@ export const query = graphql`
 	query AllPosts {
 		posts: allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
 			nodes {
+				fields {
+					slug
+				}
 				frontmatter {
 					title
 					slug
