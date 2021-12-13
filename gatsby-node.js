@@ -1,4 +1,5 @@
 const path = require("path")
+
 exports.createPages = async ({ graphql, actions }) => {
 	const { data } = await graphql(`
 		query posts {
@@ -34,6 +35,7 @@ exports.createPages = async ({ graphql, actions }) => {
 // 	createTypes(typeDefs)
 // }
 
+const { createFilePath } = require("gatsby-source-filesystem")
 exports.onCreateNode = ({ node, actions, getNode }) => {
 	const { createNodeField } = actions
 	//   fmImagesToRelative(node)
