@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "../components/Layout"
-import Img from "gatsby-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import * as styles from "../styles/post-details.module.css"
 import { graphql } from "gatsby"
 
@@ -15,7 +15,7 @@ export default function ProjectDetails({ data }) {
 				<h2>{title}</h2>
 				<h3>{category}</h3>
 				<div className={styles.featured}>
-					<Img fluid={featuredImage.childImageSharp.fluid} />
+					<GatsbyImage image={getImage(featuredImage)} />
 				</div>
 				<div className={styles.html} dangerouslySetInnerHTML={{ __html: html }}></div>
 			</div>
@@ -35,9 +35,7 @@ export const query = graphql`
 				title
 				featuredImage {
 					childImageSharp {
-						fluid {
-							...GatsbyImageSharpFluid
-						}
+						gatsbyImageData(layout: FULL_WIDTH)
 					}
 				}
 			}

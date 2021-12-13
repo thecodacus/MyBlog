@@ -7,8 +7,10 @@
 module.exports = {
 	/* Your site config here */
 	plugins: [
-		"gatsby-transformer-sharp",
+		"gatsby-plugin-image",
 		"gatsby-plugin-sharp",
+		"gatsby-transformer-sharp",
+
 		// {
 		// 	resolve: `gatsby-source-filesystem`,
 		// 	options: {
@@ -19,8 +21,8 @@ module.exports = {
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
-				path: `${__dirname}/static/assets/images/uploads`,
-				name: "uploads",
+				path: `${__dirname}/static/images`,
+				name: "media",
 			},
 		},
 		{
@@ -30,16 +32,19 @@ module.exports = {
 				path: `${__dirname}/src/posts/`,
 			},
 		},
+		// Including in your Gatsby plugins will transform any paths in your frontmatter
+		`gatsby-plugin-netlify-cms-paths`,
 		{
 			resolve: "gatsby-transformer-remark",
 			options: {
 				plugins: [
-					{
-						resolve: "gatsby-remark-relative-images",
-						options: {
-							name: "uploads", // Must match the source name ^
-						},
-					},
+					`gatsby-plugin-netlify-cms-paths`,
+					// {
+					// 	resolve: "gatsby-remark-relative-images",
+					// 	options: {
+					// 		name: "uploads", // Must match the source name ^
+					// 	},
+					// },
 					{
 						resolve: `gatsby-remark-images`,
 						options: {

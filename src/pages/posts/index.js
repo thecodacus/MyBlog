@@ -1,6 +1,6 @@
 import { graphql, Link } from "gatsby"
 import React from "react"
-import Img from "gatsby-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../../components/Layout"
 import * as styles from "../../styles/posts.module.css"
 export default function Posts({ data }) {
@@ -14,7 +14,7 @@ export default function Posts({ data }) {
 					{posts.map(post => (
 						<Link to={"/posts/" + post.frontmatter.slug} key={post.id}>
 							<div>
-								<Img fluid={post.frontmatter.featuredImage.childImageSharp.fluid} />
+								<GatsbyImage image={getImage(post.frontmatter.featuredImage)} />
 								<h3>{post.frontmatter.title}</h3>
 								<p>{post.frontmatter.category}</p>
 							</div>
@@ -37,9 +37,7 @@ export const query = graphql`
 					date
 					featuredImage {
 						childImageSharp {
-							fluid {
-								...GatsbyImageSharpFluid
-							}
+							gatsbyImageData(layout: FULL_WIDTH)
 						}
 					}
 				}
