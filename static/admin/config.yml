@@ -22,11 +22,12 @@ collections:
           - { label: "Layout", name: "layout", widget: "hidden", default: "blog" }
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Publish Date", name: "date", widget: "datetime" }
-          - label: "Category",
-            name: "category",
-            widget: "select",
-            multiple: true,
-            options: ["machine learning", "blockchain", "computer vision", "general coding"],
-            
+          - label: "Category"
+            name: "category"
+            widget: "select"
+            multiple: true
+            min: 1
+            options: ["machine learning", "blockchain", "computer vision", "general coding"]
+
           - { label: "Featured Image", name: "featuredImage", widget: "image" }
           - { label: "Body", name: "body", widget: "markdown" }
