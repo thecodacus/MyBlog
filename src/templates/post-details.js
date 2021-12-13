@@ -4,7 +4,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import * as styles from "../styles/post-details.module.css"
 import { graphql } from "gatsby"
 
-export default function ProjectDetails({ data }) {
+export default function PostDetails({ data }) {
 	console.log(data)
 	const { html } = data.markdownRemark
 	const { title, category, featuredImage } = data.markdownRemark.frontmatter

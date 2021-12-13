@@ -2,19 +2,20 @@ import { graphql, Link } from "gatsby"
 import React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../../components/Layout"
-import * as styles from "../../styles/posts.module.css"
+import * as styles from "../../styles/posts.module.scss"
 export default function Posts({ data }) {
 	console.log(data)
 	const posts = data.posts.nodes
 	return (
 		<Layout>
 			<section>
-				<div>Posts Works</div>
 				<div className={styles.posts}>
 					{posts.map(post => (
 						<Link to={"/posts/" + post.fields.slug} key={post.id}>
 							<div>
-								<GatsbyImage image={getImage(post.frontmatter.featuredImage)} alt={post.frontmatter.title} />
+								<div className="thumbnail">
+									<GatsbyImage image={getImage(post.frontmatter.featuredImage)} alt={post.frontmatter.title} />
+								</div>
 								<h3>{post.frontmatter.title}</h3>
 								<p>{post.frontmatter.category}</p>
 							</div>

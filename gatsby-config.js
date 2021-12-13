@@ -10,14 +10,15 @@ module.exports = {
 		"gatsby-plugin-image",
 		"gatsby-plugin-sharp",
 		"gatsby-transformer-sharp",
+		`gatsby-plugin-sass`,
 
-		// {
-		// 	resolve: `gatsby-source-filesystem`,
-		// 	options: {
-		// 		name: `images`,
-		// 		path: `${__dirname}/src/images/`,
-		// 	},
-		// },
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				name: `images`,
+				path: `${__dirname}/src/images/`,
+			},
+		},
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
@@ -54,11 +55,20 @@ module.exports = {
 				],
 			},
 		},
-		"gatsby-plugin-netlify-cms",
+
+		{
+			resolve: "gatsby-plugin-netlify-cms",
+			options: {
+				publicPath: `/admin`,
+				modulePath: `${__dirname}/src/admin/index.js`,
+				htmlPath: `${__dirname}/src/admin/index.html`,
+			},
+		},
 	],
 	siteMetadata: {
-		title: "The Codacus",
-		description: "The Coding Abacus",
+		title: "Codacus",
+		subHeader: "The Coding Abacus",
+		description: "A Decentralized Blog, powered by Gatsby and IPFS",
 		copyright: "Copyright 2021 The Codacus",
 	},
 }

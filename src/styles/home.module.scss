@@ -1,0 +1,24 @@
+.home {
+	.hero {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(20rem, auto));
+		// height: 40vh;
+		min-height: 40vh;
+		// width: calc(100% + 3rem);
+		// transform: translateX(-2rem);
+		align-items: center;
+
+		img {
+			border-radius: 1rem;
+
+			// box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+		}
+		.title {
+			font-weight: bolder;
+			font-size: 3rem;
+		}
+		.description {
+			font-size: 1.2rem;
+		}
+	}
+}
