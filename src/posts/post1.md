@@ -1,6 +1,6 @@
 ---
 title: "title1"
-category: "test1"
+category: computer vision
 slug: "post1"
 date: 2021-12-12T00:00:00+05:30
 featuredImage: /images/uploads/screenshot-2021-12-10-at-7.44.27-pm.png
