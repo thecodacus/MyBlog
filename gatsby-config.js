@@ -95,9 +95,7 @@ module.exports = {
 		{
 			resolve: "gatsby-plugin-netlify-cms",
 			options: {
-				publicPath: `/admin`,
 				modulePath: `${__dirname}/src/admin/index.js`,
-				htmlPath: `${__dirname}/src/admin/index.html`,
 			},
 		},
 
