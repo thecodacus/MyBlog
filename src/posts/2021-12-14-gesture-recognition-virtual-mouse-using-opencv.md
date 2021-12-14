@@ -3,7 +3,7 @@ layout: blog
 title: Gesture Recognition Virtual Mouse Using OpenCV
 date: 2017-08-17T13:47:51.545Z
 category: computer vision
-featuredImage: https://bluewhaleapps.com/wp-content/uploads/2019/08/Guesture-recognition-technology-blog-feature-image.jpg
+featuredImage: /images/uploads/guesture-recognition-technology-blog-feature-image.jpeg
 ---
 In My Last OpenCV tutorial, I wrote a program to detect green objects and track them. In this post, I am going to show you how we can extend that idea to do some more things like gesture recognition. We will apply that to create a virtual mouse.
 
