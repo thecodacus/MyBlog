@@ -52,6 +52,7 @@ export const query = graphql`
 					category
 					date
 					featuredImage {
+						publicURL
 						childImageSharp {
 							gatsbyImageData(aspectRatio: 1.5, layout: FULL_WIDTH)
 						}

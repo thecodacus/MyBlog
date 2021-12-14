@@ -110,6 +110,7 @@ module.exports = {
 		},
 	],
 	siteMetadata: {
+		url: "thecodacus.com",
 		title: "Codacus",
 		subHeader: "The Coding Abacus",
 		description: "A Decentralized Blog, powered by Gatsby and IPFS",

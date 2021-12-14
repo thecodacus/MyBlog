@@ -9,7 +9,11 @@ export default function PostsGrid({ posts }) {
 				<Link to={"/posts/" + post.fields.slug} key={post.id}>
 					<div className={styles.card}>
 						<div className={styles.thumbnail}>
-							<GatsbyImage image={getImage(post.frontmatter.featuredImage)} alt={post.frontmatter.title} />
+							{post.frontmatter.featuredImage.childImageSharp != null ? (
+								<GatsbyImage image={getImage(post.frontmatter.featuredImage)} alt={post.frontmatter.title} />
+							) : (
+								<img className={styles.alternateImage} src={post.frontmatter.featuredImage.publicURL} alt={post.frontmatter.title} />
+							)}
 						</div>
 						<span className={styles.chip}>{post.frontmatter.category}</span>
 						<div className={styles.excerpt}>
