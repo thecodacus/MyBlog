@@ -11,7 +11,7 @@ module.exports = {
 		"gatsby-plugin-sharp",
 		"gatsby-transformer-sharp",
 		`gatsby-plugin-sass`,
-
+		// file systems
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
@@ -33,8 +33,10 @@ module.exports = {
 				path: `${__dirname}/src/posts/`,
 			},
 		},
+
+		// content parsers
 		// Including in your Gatsby plugins will transform any paths in your frontmatter
-		`gatsby-plugin-netlify-cms-paths`,
+
 		{
 			resolve: "gatsby-transformer-remark",
 			options: {
@@ -88,13 +90,22 @@ module.exports = {
 				],
 			},
 		},
-
+		// netlifycms
+		`gatsby-plugin-netlify-cms-paths`,
 		{
 			resolve: "gatsby-plugin-netlify-cms",
 			options: {
 				publicPath: `/admin`,
 				modulePath: `${__dirname}/src/admin/index.js`,
 				htmlPath: `${__dirname}/src/admin/index.html`,
+			},
+		},
+
+		// comment system
+		{
+			resolve: `gatsby-plugin-disqus`,
+			options: {
+				shortname: `the-codacus`,
 			},
 		},
 	],

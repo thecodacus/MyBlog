@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap");
+
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	font-family: "Montserrat";
+	color: white;
+}
+html,
+body {
+	min-height: 100vh;
+}
+body {
+	background: radial-gradient(at top left, rgba(146, 43, 225, 1) 0%, rgba(43, 9, 107, 1) 100%);
+	background-repeat: no-repeat;
+}
+p {
+	margin: 16px auto;
+	line-height: 1.5em;
+}
+
+/* layout & nav */
+.layout {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 2rem;
+}
+/* .content {
+	flex: 1;
+} */
+nav {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	margin: 40px auto;
+}
+nav .links {
+	display: inline-block;
+	text-align: right;
+}
+nav .links a {
+	display: inline-block;
+	margin-left: 20px;
+	font-weight: 400;
+	padding-bottom: 8px;
+	border-bottom: 3px solid transparent;
+}
+nav .links a:hover {
+	border-color: white;
+}
+footer p {
+	text-align: center;
+	color: #bbb;
+	margin: 40px auto;
+}
+
+/* prismjs css*/
+/*layout.css*/
+
+/* code highlighting */
+.gatsby-highlight-code-line {
+	background-color: #4d4d4d; /* Adjust for your prismjs theme color */
+	display: block;
+	margin-right: -1em;
+	margin-left: -1em;
+	padding-right: 1em;
+	padding-left: 0.75em;
+	border-left: 0.25em solid #f99;
+}
+
+/* Make the highlightline start at the beginning of the line,
+when line numbers are displayed */
+.line-numbers .gatsby-highlight-code-line {
+	margin-left: -3.8em;
+	padding-left: 3.55em;
+}
+
+/**
+ * Add back the container background-color, border-radius, padding, margin
+ * and overflow that we removed from <pre>.
+ */
+.gatsby-highlight {
+	background-color: #2d2d2d; /* Use your prismjs theme color */
+	border-radius: 0.3em;
+	margin: 0;
+	margin-bottom: 2.5rem;
+	padding: 1em;
+	overflow: auto;
+}
+
+/**
+ * Remove the default PrismJS theme background-color, border-radius, margin,
+ * padding and overflow.
+ * 1. Make the element just wide enough to fit its content.
+ * 2. Always fill the visible space in .gatsby-highlight.
+ * 3. Adjust the position of the line numbers
+ */
+.gatsby-highlight pre[class*="language-"] {
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+	overflow: initial;
+	float: left; /* 1 */
+	min-width: 100%; /* 2 */
+}
+
+/**
+ * If you only want to use line numbering
+ */
+.gatsby-highlight pre[class*="language-"].line-numbers {
+	padding: 0;
+	padding-left: 2.8em;
+	overflow: initial;
+}
+/* prismjs css end*/

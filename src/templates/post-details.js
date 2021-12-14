@@ -1,12 +1,16 @@
 import React from "react"
+import { graphql } from "gatsby"
+import Disqus from "gatsby-plugin-disqus"
 import Layout from "../components/Layout"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import * as styles from "../styles/post-details.module.scss"
-import { graphql } from "gatsby"
 
 export default function PostDetails({ data }) {
 	console.log(data)
-	const { html } = data.markdownRemark
+	const {
+		html,
+		fields: { slug },
+	} = data.markdownRemark
 	const { title, category, featuredImage, date } = data.markdownRemark.frontmatter
 
 	return (
@@ -22,6 +26,7 @@ export default function PostDetails({ data }) {
 					<h3>{category}</h3>
 				</div>
 				<div className={styles.html} dangerouslySetInnerHTML={{ __html: html }}></div>
+				<Disqus identifier={slug} title={title} />
 			</div>
 		</Layout>
 	)
