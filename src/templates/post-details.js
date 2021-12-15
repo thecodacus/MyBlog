@@ -8,12 +8,12 @@ import * as styles from "../styles/post-details.module.scss"
 export default function PostDetails({ data }) {
 	console.log(data)
 	const { id, html } = data.markdownRemark
-	const { slug } = data.markdownRemark.fields
+	// const { slug } = data.markdownRemark.fields
 	const { title, category, featuredImage, date } = data.markdownRemark.frontmatter
 	const featuredImagePath = featuredImage.publicURL
 
 	let disqusConfig = {
-		url: `${data.site.siteMetadata.url}`,
+		// url: `${data.site.siteMetadata.url}`,
 		identifier: id,
 		title: title,
 	}

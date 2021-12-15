@@ -13,7 +13,7 @@ export default function Home({ data }) {
 		<Layout>
 			<div className={styles.home}>
 				<section className={styles.hero}>
-					<div>
+					<div className={styles.heroText}>
 						<div className={styles.title}>Welcome To</div>
 						<div className={styles.title}>{info.siteMetadata.subHeader}</div>
 						<div className={styles.description}>{info.siteMetadata.description}</div>

@@ -1,7 +1,7 @@
 import React from "react"
-import * as styles from "../styles/posts.module.scss"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Link } from "gatsby"
+import * as styles from "../styles/posts.module.scss"
 export default function PostsGrid({ posts }) {
 	return (
 		<div className={styles.posts}>
@@ -9,10 +9,10 @@ export default function PostsGrid({ posts }) {
 				<Link to={"/posts/" + post.fields.slug} key={post.id}>
 					<div className={styles.card}>
 						<div className={styles.thumbnail}>
-							{post.frontmatter.featuredImage.childImageSharp != null ? (
+							{post.frontmatter.featuredImage?.childImageSharp != null ? (
 								<GatsbyImage image={getImage(post.frontmatter.featuredImage)} alt={post.frontmatter.title} />
 							) : (
-								<img className={styles.alternateImage} src={post.frontmatter.featuredImage.publicURL} alt={post.frontmatter.title} />
+								<img className={styles.alternateImage} src={post.frontmatter.featuredImage?.publicURL} alt={post.frontmatter.title} />
 							)}
 						</div>
 						<span className={styles.chip}>{post.frontmatter.category}</span>

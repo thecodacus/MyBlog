@@ -30,25 +30,7 @@ p {
 /* .content {
 	flex: 1;
 } */
-nav {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	margin: 40px auto;
-}
-nav .links {
-	display: inline-block;
-	text-align: right;
-}
-nav .links a {
-	display: inline-block;
-	margin-left: 20px;
-	font-weight: 400;
-	padding-bottom: 8px;
-	border-bottom: 3px solid transparent;
-}
-nav .links a:hover {
-	border-color: white;
-}
+
 footer p {
 	text-align: center;
 	color: #bbb;
