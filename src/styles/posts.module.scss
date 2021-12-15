@@ -2,7 +2,18 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 	grid-gap: 80px;
-	margin: 80px 20px;
+	margin: 20px 20px;
+}
+.hero {
+	display: flex;
+	font-size: 5rem;
+	min-height: 30vh;
+	justify-content: center;
+	align-items: center;
+}
+.header {
+	font-size: 1.5rem;
+	font-variant-caps: all-small-caps;
 }
 .card {
 	background-color: white;

@@ -1,28 +1,23 @@
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import React from "react"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../../components/Layout"
+import PageHeroName from "../../components/PageHeroName"
+import PostsGrid from "../../components/PostsGrid"
 import * as styles from "../../styles/posts.module.scss"
 export default function Posts({ data }) {
 	console.log(data)
 	const posts = data.posts.nodes
+	let categories = Array.from(new Set(posts.map(post => post.frontmatter.category)))
+	let postGrids = categories.map((category, index) => (
+		<div key={index}>
+			<div className={styles.header}>{category}</div>
+			<PostsGrid posts={posts.filter(post => post.frontmatter.category === category)}></PostsGrid>
+		</div>
+	))
 	return (
 		<Layout>
-			<section>
-				<div className={styles.posts}>
-					{posts.map(post => (
-						<Link to={"/posts/" + post.fields.slug} key={post.id}>
-							<div>
-								<div className="thumbnail">
-									<GatsbyImage image={getImage(post.frontmatter.featuredImage)} alt={post.frontmatter.title} />
-								</div>
-								<h3>{post.frontmatter.title}</h3>
-								<p>{post.frontmatter.category}</p>
-							</div>
-						</Link>
-					))}
-				</div>
-			</section>
+			<PageHeroName>Posts</PageHeroName>
+			<section>{postGrids}</section>
 		</Layout>
 	)
 }
@@ -34,14 +29,15 @@ export const query = graphql`
 				fields {
 					slug
 				}
+				excerpt
 				frontmatter {
 					title
-					slug
 					category
 					date
 					featuredImage {
+						publicURL
 						childImageSharp {
-							gatsbyImageData(layout: FULL_WIDTH)
+							gatsbyImageData(aspectRatio: 1.5, layout: FULL_WIDTH)
 						}
 					}
 				}
