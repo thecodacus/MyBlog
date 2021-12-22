@@ -4,6 +4,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import React from "react"
 import Layout from "../components/Layout"
 import PostsGrid from "../components/PostsGrid"
+import Seo from "../components/Seo"
 import * as styles from "../styles/home.module.scss"
 
 export default function Home({ data }) {
@@ -11,6 +12,7 @@ export default function Home({ data }) {
 	const { banner, info, posts } = data
 	return (
 		<Layout>
+			<Seo title="Home" />
 			<div className={styles.home}>
 				<section className={styles.hero}>
 					<div className={styles.heroText}>
