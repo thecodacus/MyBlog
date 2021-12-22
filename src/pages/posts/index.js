@@ -3,6 +3,7 @@ import React from "react"
 import Layout from "../../components/Layout"
 import PageHeroName from "../../components/PageHeroName"
 import PostsGrid from "../../components/PostsGrid"
+import Seo from "../../components/Seo"
 import * as styles from "../../styles/posts.module.scss"
 export default function Posts({ data }) {
 	console.log(data)

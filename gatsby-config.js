@@ -11,6 +11,7 @@ module.exports = {
 		"gatsby-plugin-sharp",
 		"gatsby-transformer-sharp",
 		`gatsby-plugin-sass`,
+		"gatsby-plugin-react-helmet",
 		// file systems
 		{
 			resolve: `gatsby-source-filesystem`,
@@ -113,5 +114,8 @@ module.exports = {
 		subHeader: "The Coding Abacus",
 		description: "A Decentralized Blog, powered by Gatsby and IPFS",
 		copyright: "Copyright 2021 The Codacus",
+		social: {
+			twitter: "thecodacus",
+		},
 	},
 }

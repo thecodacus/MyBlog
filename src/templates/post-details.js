@@ -4,6 +4,7 @@ import { Disqus, CommentCount } from "gatsby-plugin-disqus"
 import Layout from "../components/Layout"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import * as styles from "../styles/post-details.module.scss"
+import Seo from "../components/Seo"
 
 export default function PostDetails({ data }) {
 	console.log(data)
@@ -20,6 +21,7 @@ export default function PostDetails({ data }) {
 
 	return (
 		<Layout>
+			<Seo title={title} />
 			<div className={styles.details}>
 				<h1>{title}</h1>
 				<div className={styles.metadata}>
