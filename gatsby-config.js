@@ -11,7 +11,6 @@ module.exports = {
 		"gatsby-plugin-sharp",
 		"gatsby-transformer-sharp",
 		`gatsby-plugin-sass`,
-		`gatsby-plugin-react-helmet`,
 		// file systems
 		{
 			resolve: `gatsby-source-filesystem`,
@@ -20,7 +19,13 @@ module.exports = {
 				path: `${__dirname}/src/images/`,
 			},
 		},
-
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				path: `${__dirname}/static/images`,
+				name: "media",
+			},
+		},
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
@@ -107,10 +112,6 @@ module.exports = {
 		title: "Codacus",
 		subHeader: "The Coding Abacus",
 		description: "A Decentralized Blog, powered by Gatsby and IPFS",
-		social: {
-			twitter: "thecodacus",
-			github: "thecodacus",
-		},
 		copyright: "Copyright 2021 The Codacus",
 	},
 }

@@ -16,7 +16,6 @@ export default function Posts({ data }) {
 	))
 	return (
 		<Layout>
-			<Seo title="Posts" />
 			<PageHeroName>Posts</PageHeroName>
 			<section>{postGrids}</section>
 		</Layout>
