@@ -14,17 +14,23 @@ export default function Home({ data }) {
 		<Layout>
 			<Seo title="Home" />
 			<div className={styles.home}>
-				<section className={styles.hero}>
+				<section className={styles.hero} style={{ filter: "drop-shadow(7px 8px 5px rgb(0, 0, 0, 0.3))" }}>
 					<div className={styles.heroText}>
-						<div className={styles.title}>Welcome To</div>
-						<div className={styles.title}>{info.siteMetadata.subHeader}</div>
-						<div className={styles.description}>{info.siteMetadata.description}</div>
+						<div className={styles.description}>Welcome To {info.siteMetadata.subHeader}</div>
+						<div className={styles.title}>{info.siteMetadata.description}</div>
+						<div className={styles.ps}>{info.siteMetadata.ps}</div>
 					</div>
 					{banner.childImageSharp != null ? (
 						<GatsbyImage image={getImage(banner)} alt="banner image" />
 					) : (
 						<img
-							style={{ width: "calc(100% - 2rem)", padding: "1rem", maxWidth: "600px", marginLeft: "auto" }}
+							style={{
+								width: "calc(100% - 2rem)",
+								padding: "1rem",
+								maxWidth: "600px",
+								marginLeft: "auto",
+								// filter: "drop-shadow(7px 8px 5px rgb(0, 0, 0, 0.3))",
+							}}
 							src={banner.publicURL}
 							alt="banner image"
 						/>
@@ -50,6 +56,7 @@ export const query = graphql`
 				title
 				subHeader
 				description
+				ps
 			}
 		}
 		posts: allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {

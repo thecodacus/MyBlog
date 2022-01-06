@@ -112,7 +112,8 @@ module.exports = {
 		url: "thecodacus.com",
 		title: "Codacus",
 		subHeader: "The Coding Abacus",
-		description: "A Decentralized Blog, powered by Gatsby and IPFS",
+		description: "A Decentralized Blog",
+		ps: "- powered by Gatsby and IPFS",
 		copyright: "Copyright 2021 The Codacus",
 		social: {
 			twitter: "thecodacus",

@@ -17,11 +17,17 @@
 			margin-bottom: 2rem;
 		}
 		.title {
-			font-weight: bolder;
+			// font-weight: bolder;
+			// font-size: 3rem;
 			font-size: 3rem;
+			text-align: center;
 		}
 		.description {
 			font-size: 1.2rem;
+		}
+		.ps {
+			font-size: 1.2rem;
+			text-align: end;
 		}
 	}
 }
