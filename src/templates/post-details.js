@@ -8,7 +8,7 @@ import Seo from "../components/Seo"
 
 export default function PostDetails({ data }) {
 	console.log(data)
-	const { id, html } = data.markdownRemark
+	const { id, html, excerpt } = data.markdownRemark
 	// const { slug } = data.markdownRemark.fields
 	const { title, category, featuredImage, date } = data.markdownRemark.frontmatter
 	const featuredImagePath = featuredImage.publicURL
@@ -21,7 +21,7 @@ export default function PostDetails({ data }) {
 
 	return (
 		<Layout>
-			<Seo title={title} />
+			<Seo title={title} description={excerpt} />
 			<div className={styles.details}>
 				<h1>{title}</h1>
 				<div className={styles.metadata}>
@@ -58,6 +58,7 @@ export const query = graphql`
 			fields {
 				slug
 			}
+			excerpt
 			frontmatter {
 				date
 				slug

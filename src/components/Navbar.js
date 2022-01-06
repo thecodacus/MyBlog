@@ -24,7 +24,7 @@ class NavbarClass extends React.Component {
 		return (
 			<nav className={styles.nav}>
 				<Link to="/">
-					<h1>{title}</h1>
+					<h1>{title.toUpperCase()}</h1>
 				</Link>
 				<div className={menuClass.join(" ")}>
 					<Link to="/">Home</Link>

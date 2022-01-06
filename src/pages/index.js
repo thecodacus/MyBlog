@@ -20,7 +20,15 @@ export default function Home({ data }) {
 						<div className={styles.title}>{info.siteMetadata.subHeader}</div>
 						<div className={styles.description}>{info.siteMetadata.description}</div>
 					</div>
-					<GatsbyImage image={getImage(banner)} alt="banner image" />
+					{banner.childImageSharp != null ? (
+						<GatsbyImage image={getImage(banner)} alt="banner image" />
+					) : (
+						<img
+							style={{ width: "calc(100% - 2rem)", padding: "1rem", maxWidth: "600px", marginLeft: "auto" }}
+							src={banner.publicURL}
+							alt="banner image"
+						/>
+					)}
 				</section>
 				<section className="postgrid">
 					<PostsGrid posts={posts.nodes} />
@@ -31,7 +39,8 @@ export default function Home({ data }) {
 }
 export const query = graphql`
 	query HomePageContent {
-		banner: file(relativePath: { eq: "homepage-banner.jpeg" }) {
+		banner: file(relativePath: { eq: "homepage-banner.svg" }) {
+			publicURL
 			childImageSharp {
 				gatsbyImageData(layout: FULL_WIDTH)
 			}
