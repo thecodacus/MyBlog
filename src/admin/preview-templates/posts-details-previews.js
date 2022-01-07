@@ -22,7 +22,7 @@ const PostDetailsPreview = ({ entry, widgetFor }) => {
 				date,
 				publicURL,
 			}}
-		/>
+		></Article>
 	)
 }
 

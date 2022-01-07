@@ -23,8 +23,9 @@ export default function PostDetails({ data }) {
 	return (
 		<Layout>
 			<Seo title={props.title} description={props.excerpt} />
-			<Article {...props}></Article>
-			<Disqus config={disqusConfig} />
+			<Article {...props}>
+				<Disqus config={disqusConfig} />
+			</Article>
 		</Layout>
 	)
 }
