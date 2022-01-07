@@ -6,7 +6,7 @@ import Seo from "../components/Seo"
 import Article from "../components/Article"
 
 export default function PostDetails({ data }) {
-	console.log(data)
+	// console.log(data)
 	const props = {
 		...data,
 		...data?.markdownRemark,

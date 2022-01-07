@@ -140,7 +140,7 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-sitemap`,
 			options: {
-				output: `/sitemap.xml`,
+				output: `/sitemap`,
 				excludes: ["/admin/**"],
 				query: `
 					{
