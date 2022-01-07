@@ -12,6 +12,22 @@ module.exports = {
 		"gatsby-transformer-sharp",
 		`gatsby-plugin-sass`,
 		"gatsby-plugin-react-helmet",
+		// pwa
+		{
+			resolve: `gatsby-plugin-manifest`,
+			options: {
+				name: `The Coding Abacus`,
+				short_name: `Codacus`,
+				start_url: `/`,
+				background_color: `#f7f0eb`,
+				theme_color: `#a2466c`,
+				display: `standalone`,
+				icon: `src/images/codacus.jpg`,
+			},
+		},
+		{
+			resolve: `gatsby-plugin-offline`,
+		},
 		// file systems
 		{
 			resolve: `gatsby-source-filesystem`,
