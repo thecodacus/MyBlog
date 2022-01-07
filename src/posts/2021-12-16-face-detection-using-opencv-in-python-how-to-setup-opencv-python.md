@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: Face Detection Using OpenCV In Python | How To Setup OpenCV Python
-date: 2021-12-16T17:13:54.773Z
+date: 2017-01-30T17:13:54.773Z
 category: computer vision
 featuredImage: /images/uploads/7cd53d36d121d839da9600ca055b01db.gif
 ---
