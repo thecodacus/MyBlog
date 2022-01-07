@@ -5,6 +5,18 @@
  */
 
 module.exports = {
+	siteMetadata: {
+		url: "https://codacus.com",
+		siteUrl: "https://codacus.com",
+		title: "Codacus",
+		subHeader: "The Coding Abacus",
+		description: "A Decentralized Blog",
+		ps: "- powered by Gatsby and IPFS",
+		copyright: "Copyright 2021 The Codacus",
+		social: {
+			twitter: "thecodacus",
+		},
+	},
 	/* Your site config here */
 	plugins: [
 		"gatsby-plugin-image",
@@ -22,7 +34,7 @@ module.exports = {
 				background_color: `#f7f0eb`,
 				theme_color: `#a2466c`,
 				display: `standalone`,
-				icon: `src/images/codacus.jpg`,
+				icon: `src/images/codacus.png`,
 			},
 		},
 		{
@@ -123,16 +135,38 @@ module.exports = {
 				shortname: `the-codacus`,
 			},
 		},
-	],
-	siteMetadata: {
-		url: "thecodacus.com",
-		title: "Codacus",
-		subHeader: "The Coding Abacus",
-		description: "A Decentralized Blog",
-		ps: "- powered by Gatsby and IPFS",
-		copyright: "Copyright 2021 The Codacus",
-		social: {
-			twitter: "thecodacus",
+
+		// sitemap
+		{
+			resolve: `gatsby-plugin-sitemap`,
+			options: {
+				output: `/sitemap.xml`,
+				exclude: ["/admin/**"],
+				query: `
+					{
+						site {
+							siteMetadata {
+								siteUrl
+							}
+						}
+						allSitePage {
+							edges {
+								node {
+									path
+								}
+							}
+						}
+					}
+				`,
+				serialize: ({ site, allSitePage }) =>
+					allSitePage.edges.map(edge => {
+						return {
+							url: site.siteMetadata.siteUrl + edge.node.path,
+							changefreq: `daily`,
+							priority: 0.7,
+						}
+					}),
+			},
 		},
-	},
+	],
 }
