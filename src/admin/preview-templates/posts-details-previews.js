@@ -1,12 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Article from "../../components/Article"
-require("prismjs/themes/prism-tomorrow.css")
-require("prismjs/plugins/line-numbers/prism-line-numbers.css")
-require("prismjs/plugins/show-language/prism-show-language.js")
 
 const PostDetailsPreview = ({ entry, widgetFor, getAsset }) => {
 	//  id, html, excerpt, title, category, featuredImage, date, publicURL
+	require("prismjs/themes/prism-tomorrow.css")
+	require("prismjs/plugins/line-numbers/prism-line-numbers.css")
+	require("prismjs/plugins/show-language/prism-show-language.js")
 	const title = entry.getIn(["data", "title"])
 	const date = entry.getIn(["data", "date"])
 	const category = entry.getIn(["data", "category"])
