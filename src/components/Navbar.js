@@ -31,7 +31,14 @@ class NavbarClass extends React.Component {
 					<Link to="/posts">Posts</Link>
 					<Link to="/about">About</Link>
 				</div>
-				<div onClick={this.toggle.bind(this)} className={hamburgerClass.join(" ")}>
+				<div
+					role="button"
+					tabIndex={-1}
+					tabbable
+					onClick={this.toggle.bind(this)}
+					onKeyDown={this.toggle.bind(this)}
+					className={hamburgerClass.join(" ")}
+				>
 					<span className={styles.bar}></span>
 					<span className={styles.bar}></span>
 					<span className={styles.bar}></span>

@@ -32,7 +32,7 @@ export default function Home({ data }) {
 								// filter: "drop-shadow(7px 8px 5px rgb(0, 0, 0, 0.3))",
 							}}
 							src={banner.publicURL}
-							alt="banner image"
+							alt="banner"
 						/>
 					)}
 				</section>

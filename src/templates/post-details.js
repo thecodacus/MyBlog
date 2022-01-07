@@ -8,10 +8,15 @@ import Seo from "../components/Seo"
 
 export default function PostDetails({ data }) {
 	console.log(data)
-	const { id, html, excerpt } = data.markdownRemark
-	// const { slug } = data.markdownRemark.fields
-	const { title, category, featuredImage, date } = data.markdownRemark.frontmatter
-	const featuredImagePath = featuredImage.publicURL
+	const props = {
+		...data,
+		...data?.markdownRemark,
+		...data?.markdownRemark?.frontmatter,
+		...data?.markdownRemark?.frontmatter?.featuredImage,
+	}
+	const { id, html, excerpt, title, category, featuredImage, date, publicURL } = props
+
+	const featuredImagePath = featuredImage.publicURL || publicURL
 
 	let disqusConfig = {
 		// url: `${data.site.siteMetadata.url}`,

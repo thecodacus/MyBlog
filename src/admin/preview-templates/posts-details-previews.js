@@ -1,15 +1,27 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { PostDetails } from "../../templates/post-details"
+import PostDetails from "../../templates/post-details"
 
 const PostDetailsPreview = ({ entry, widgetFor }) => {
-	const tags = entry.getIn(["data", "tags"])
+	//  id, html, excerpt, title, category, featuredImage, date, publicURL
+	const title = entry.getIn(["data", "title"])
+	const date = entry.getIn(["data", "date"])
+	const category = entry.getIn(["data", "category"])
+	const featuredImage = entry.getIn(["data", "featuredImage"])
+	const publicURL = featuredImage
+	const html = widgetFor("body")
 	return (
 		<PostDetails
-			content={widgetFor("body")}
-			description={entry.getIn(["data", "description"])}
-			tags={tags && tags.toJS()}
-			title={entry.getIn(["data", "title"])}
+			data={{
+				// id: entry.getIn(["data", "id"]),
+				html,
+				// excerpt: entry.getIn(["data", "excerpt"]),
+				title,
+				category,
+				featuredImage,
+				date,
+				publicURL,
+			}}
 		/>
 	)
 }
@@ -20,5 +32,4 @@ PostDetailsPreview.propTypes = {
 	}),
 	widgetFor: PropTypes.func,
 }
-
-export default BlogPostPreview
+export default PostDetailsPreview
