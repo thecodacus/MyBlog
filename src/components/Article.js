@@ -2,7 +2,7 @@ import React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import * as styles from "../styles/post-details.module.scss"
 export default function Article({ html, bodyWidget, title, category, featuredImage, date, publicURL, children }) {
-	const featuredImagePath = featuredImage?.publicURL || publicURL
+	const featuredImagePath = publicURL
 	return (
 		<article className={styles.details}>
 			<h1>{title}</h1>
