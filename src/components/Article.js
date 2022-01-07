@@ -14,11 +14,17 @@ const options = {
 	highlight: function (str, lang) {
 		// var languageString = "language-" + lang
 		if (Prism.languages[lang]) {
-			return (
-				'<pre class="language-' + lang + '"><code class="language-' + lang + '">' + Prism.highlight(str, Prism.languages[lang], lang) + "</code></pre>"
-			)
+			return `
+                <div class="gatsby-highlight" data-language="${lang}">
+                    <pre class="language-${lang} line-numbers"><code class="language-${lang}">${Prism.highlight(str, Prism.languages[lang], lang)}</code></pre>
+                </div>
+                `
 		} else {
-			return '<pre class="language-' + lang + '"><code class="language-' + lang + '">' + Prism.util.encode(str) + "</code></pre>"
+			return `
+            <div class="gatsby-highlight" data-language="${lang}">
+                <pre class="language-${lang} line-numbers"><code class="language-${lang}">${Prism.util.encode(str)}</code></pre>
+            </div>
+            `
 		}
 	},
 }
