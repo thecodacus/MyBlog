@@ -9,7 +9,7 @@ const PostDetailsPreview = ({ entry, widgetFor, getAsset }) => {
 	const category = entry.getIn(["data", "category"])
 	const featuredImage = entry.getIn(["data", "featuredImage"])
 	console.log("featuredImage:", featuredImage)
-	const publicURL = getAsset(featuredImage)?.toString()
+	const publicURL = featuredImage ? getAsset(featuredImage)?.toString() : null
 	const bodyWidget = widgetFor("body")
 	return (
 		<Article
