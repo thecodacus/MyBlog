@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: codacus.com
+Token: 2062e9276798b13521e71217fe512aa1fc2dc5e17f383d5f4173a9fbdd0e65f5
