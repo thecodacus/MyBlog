@@ -3,8 +3,11 @@
 	grid-template-columns: 1fr 1fr;
 	margin: 40px auto;
 	.links {
-		display: inline-block;
-		text-align: right;
+		// display: inline-block;
+		// text-align: right;
+		gap: 4rem;
+		display: flex;
+		justify-content: end;
 		a {
 			display: inline-block;
 			margin-left: 20px;
