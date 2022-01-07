@@ -1,7 +1,7 @@
 import React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import * as styles from "../styles/post-details.module.scss"
-export default function Article({ html, title, category, featuredImage, date, publicURL, children }) {
+export default function Article({ html, bodyWidget, title, category, featuredImage, date, publicURL, children }) {
 	const featuredImagePath = featuredImage?.publicURL || publicURL
 	return (
 		<article className={styles.details}>
@@ -19,7 +19,8 @@ export default function Article({ html, title, category, featuredImage, date, pu
 					<img className={styles.alternateImage} src={featuredImagePath} alt={title} />
 				)}
 			</div>
-			<div className={styles.html} dangerouslySetInnerHTML={{ __html: html }}></div>
+			{html ? <div className={styles.html} dangerouslySetInnerHTML={{ __html: html }}></div> : bodyWidget}
+
 			{children}
 		</article>
 	)

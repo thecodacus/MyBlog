@@ -10,12 +10,12 @@ const PostDetailsPreview = ({ entry, widgetFor }) => {
 	const featuredImage = entry.getIn(["data", "featuredImage"])
 	console.log("featuredImage:", featuredImage)
 	const publicURL = featuredImage
-	const html = widgetFor("body")
+	const bodyWidget = widgetFor("body")
 	return (
 		<Article
 			{...{
 				// id: entry.getIn(["data", "id"]),
-				html,
+				bodyWidget,
 				// excerpt: entry.getIn(["data", "excerpt"]),
 				title,
 				category,
