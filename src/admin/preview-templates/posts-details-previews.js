@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import PostDetails from "../../templates/post-details"
+import Article from "../../components/Article"
 
 const PostDetailsPreview = ({ entry, widgetFor }) => {
 	//  id, html, excerpt, title, category, featuredImage, date, publicURL
@@ -11,8 +11,8 @@ const PostDetailsPreview = ({ entry, widgetFor }) => {
 	const publicURL = featuredImage
 	const html = widgetFor("body")
 	return (
-		<PostDetails
-			data={{
+		<Article
+			{...{
 				// id: entry.getIn(["data", "id"]),
 				html,
 				// excerpt: entry.getIn(["data", "excerpt"]),
