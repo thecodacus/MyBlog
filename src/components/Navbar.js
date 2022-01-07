@@ -22,7 +22,7 @@ class NavbarClass extends React.Component {
 		if (this.state.menuToogle) hamburgerClass = [styles.hamburger, styles.active]
 		if (this.state.menuToogle) menuClass = [styles.links, styles.active]
 		return (
-			<nav className={styles.nav} style={{ filter: "drop-shadow(7px 8px 5px rgb(0, 0, 0, 0.3))" }}>
+			<nav className={styles.nav}>
 				<Link to="/">
 					<h1>{title.toUpperCase()}</h1>
 				</Link>

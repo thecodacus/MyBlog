@@ -110,3 +110,12 @@
 		width: 100%;
 	}
 }
+
+@media only screen and (max-width: 768px) {
+	.details {
+		padding: 0.7rem;
+	}
+	.html {
+		padding: 0.5rem;
+	}
+}

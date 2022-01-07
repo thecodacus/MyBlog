@@ -2,9 +2,13 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	margin: 40px auto;
+	a {
+		filter: drop-shadow(7px 8px 5px rgb(0, 0, 0, 0.3));
+	}
 	.links {
 		// display: inline-block;
 		// text-align: right;
+		filter: drop-shadow(7px 8px 5px rgb(0, 0, 0, 0.3));
 		gap: 4rem;
 		display: flex;
 		justify-content: end;
@@ -43,7 +47,7 @@
 			justify-content: space-between;
 			align-items: center;
 			position: fixed;
-			left: calc(-100% - 0.1rem);
+			left: calc(-150% - 0.1rem);
 			top: 5rem;
 			flex-direction: column;
 			background-color: #fff;
