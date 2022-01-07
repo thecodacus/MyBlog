@@ -75,7 +75,7 @@ detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 let add the video capture object now
 
 ```python
-
+cap=cv2.VideoCapture(0)
 ```
 
 In the above line VideoCapture has one argument which is device id, for an inbuilt webcam it's usually ‘0’, and if you have some other webcam you can change that number to see that is your webcam’s Id
