@@ -13,7 +13,7 @@ export default function Article({ html, title, category, featuredImage, date, pu
 			</div>
 
 			<div className={styles.featured}>
-				{featuredImage.childImageSharp != null ? (
+				{featuredImage?.childImageSharp ? (
 					<GatsbyImage image={getImage(featuredImage)} alt={title} />
 				) : (
 					<img className={styles.alternateImage} src={featuredImagePath} alt={title} />
