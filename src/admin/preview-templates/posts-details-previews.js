@@ -1,6 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Article from "../../components/Article"
+require("prismjs/themes/prism-tomorrow.css")
+require("prismjs/plugins/line-numbers/prism-line-numbers.css")
+require("prismjs/plugins/show-language/prism-show-language.js")
+const loadLanguages = require("prismjs/components/")
+loadLanguages(["python"])
 
 const PostDetailsPreview = ({ entry, widgetFor, getAsset }) => {
 	//  id, html, excerpt, title, category, featuredImage, date, publicURL

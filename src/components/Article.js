@@ -5,11 +5,6 @@ import * as styles from "../styles/post-details.module.scss"
 import markdownIt from "markdown-it"
 // import markdownItKatex from "@iktakahiro/markdown-it-katex"
 import Prism from "prismjs"
-require("prismjs/themes/prism-tomorrow.css")
-require("prismjs/plugins/line-numbers/prism-line-numbers.css")
-require("prismjs/plugins/show-language/prism-show-language.js")
-const loadLanguages = require("prismjs/components/")
-loadLanguages(["python"])
 // customize markdown-it
 const options = {
 	html: true,
