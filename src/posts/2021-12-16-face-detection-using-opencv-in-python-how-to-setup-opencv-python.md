@@ -1,10 +1,11 @@
 ---
 layout: blog
 title: Face Detection Using OpenCV In Python | How To Setup OpenCV Python
-date: 2017-01-30T17:13:54.773Z
+date: 2017-01-30T14:13:54.773Z
 category: computer vision
 featuredImage: /images/uploads/7cd53d36d121d839da9600ca055b01db.gif
 ---
+
 Opencv is the most popular computer vision library, and today we are going to learn how to set up opencv, how to access your webcam and, how easily we can write a face detection program with just a few lines of code.
 
 Hi there, this is me Anirban, writing my first blog on face detection, I am a crazy person, and if you are like me you might like the kind of stuff that is in my blog.
@@ -21,27 +22,27 @@ So without wasting any more time let's move to the main stuff.\
 \
 To setup OpenCV in python environment, you will need these things ready ( match the versions to follow along with this tutorial),
 
-* [Python 2.x](https://web.archive.org/web/20200803144552/https://www.python.org/downloads/)
-* [OpenCV 2.x](https://web.archive.org/web/20200803144552/http://opencv.org/downloads.html)
-* Numpy library (later will download it using pip)
+-   [Python 2.x](https://web.archive.org/web/20200803144552/https://www.python.org/downloads/)
+-   [OpenCV 2.x](https://web.archive.org/web/20200803144552/http://opencv.org/downloads.html)
+-   Numpy library (later will download it using pip)
 
 First thing first download python and install it in its default location (i.e c:/python27)\
-after you have installed it download the OpenCV and extract it, go to ***“opencv/Build/python/2.7/x86”*** folder and copy ***“cv2.pyd”*** file to ***“c:/python27/Lib/site-packages/”*** folder.
+after you have installed it download the OpenCV and extract it, go to **_“opencv/Build/python/2.7/x86”_** folder and copy **_“cv2.pyd”_** file to **_“c:/python27/Lib/site-packages/”_** folder.
 
 And now we are ready to use OpenCV in python. just one single problem is there, Opencv uses NumPy library for its images so we have to install NumPy library too, let's do that
 
-Go to Start and type ***“cmd”*** you will see the command prompt icon right-click on it and select ***“run as administrator”*** this will bring us to the cmd window.
+Go to Start and type **_“cmd”_** you will see the command prompt icon right-click on it and select **_“run as administrator”_** this will bring us to the cmd window.
 
 Now type\
-***“cd c:/python27/scripts/”***\
+**_“cd c:/python27/scripts/”_**\
 hit enter then type\
-***“pip install numpy”***
+**_“pip install numpy”_**
 
 This will install the NumPy library in your python packages
 
 ## Now We Are Ready To Do Some Coding
 
-Go to Start and search ***“IDLE”*** and open it. 
+Go to Start and search **_“IDLE”_** and open it.
 
 To use OpenCV we need to import the opencv library first,
 
@@ -64,7 +65,7 @@ Now that everything is set up and running let's write a code to detect faces fro
 This is a kind of hello world program for opencv\
 The method that we are going to use in this program is a cascade classifier, which can be loaded with a pre-trained xml file, these xml files are hard to train but luckily we don't have to worry opencv already has many of pretrained classifiers ready for face detection.
 
-To use the face detection classifier we need to copy the classifier xml file from the ***“\[opencv extracted folder]*/sources/data/haarcascades/”**, and then copy the file ***haarcascade_frontalface_default.xml*** to your project folder (the same location where you will save the python program)
+To use the face detection classifier we need to copy the classifier xml file from the **_“\[opencv extracted folder]_/sources/data/haarcascades/”**, and then copy the file **_haarcascade_frontalface_default.xml_** to your project folder (the same location where you will save the python program)
 
 Now that's done we can proceed further and load the classifier now
 
@@ -90,7 +91,7 @@ cv2.waitKey(0)
 
 looks like its working fine
 
-in the above code we read the image from the video capture object using ***cap.read()*** method, it returns one status variable which is just ***True/False,*** and the captured frame then we used ***imshow()*** method to display the image, here the first argument is the window name and the second argument is the image that we want to display, the third line we used ***waitKey(10)*** is used for a delay of 10 milliseconds, it is important for the ***imshow()*** method to work properly
+in the above code we read the image from the video capture object using **_cap.read()_** method, it returns one status variable which is just **_True/False,_** and the captured frame then we used **_imshow()_** method to display the image, here the first argument is the window name and the second argument is the image that we want to display, the third line we used **_waitKey(10)_** is used for a delay of 10 milliseconds, it is important for the **_imshow()_** method to work properly
 
 Before using the face detector we need to convert the captured image to grayscale
 
@@ -137,7 +138,7 @@ while(True):
         break
 ```
 
-You can see that I changed the ***“waitKey”*** because it also returns the value of the key pressed in the keyboard so we are comparing it with the key ‘q’ if it's true then we are breaking the loop
+You can see that I changed the **_“waitKey”_** because it also returns the value of the key pressed in the keyboard so we are comparing it with the key ‘q’ if it's true then we are breaking the loop
 
 after the program ends we need to release the video capture object and destroy all the windows
 
@@ -165,7 +166,7 @@ while(True):
     cv2.imshow('frame',img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-    
+
 cap.release()
 cv2.destroyAllWindows()
 ```
@@ -178,11 +179,11 @@ cv2.destroyAllWindows()
 
 In this post, you discovered how to setup opencv in python, and wrote your very own face detection program specifically, you learned the most basic steps in opencv including:
 
-* How to use a classifier.
-* How to read images from the camera
-* How to Draw on images
-* How to display images
-* Mainly you learned face detection in real-time
+-   How to use a classifier.
+-   How to read images from the camera
+-   How to Draw on images
+-   How to display images
+-   Mainly you learned face detection in real-time
 
 Do you have any questions about opencv or this tutorial?
 
