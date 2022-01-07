@@ -8,6 +8,7 @@ const PostDetailsPreview = ({ entry, widgetFor }) => {
 	const date = entry.getIn(["data", "date"])
 	const category = entry.getIn(["data", "category"])
 	const featuredImage = entry.getIn(["data", "featuredImage"])
+	console.log("featuredImage:", featuredImage)
 	const publicURL = featuredImage
 	const html = widgetFor("body")
 	return (
