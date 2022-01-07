@@ -4,6 +4,7 @@ import Article from "../../components/Article"
 
 const PostDetailsPreview = ({ entry, widgetFor, getAsset }) => {
 	//  id, html, excerpt, title, category, featuredImage, date, publicURL
+	require("prismjs/themes/prism-tomorrow.css")
 
 	const title = entry.getIn(["data", "title"])
 	const date = entry.getIn(["data", "date"])
