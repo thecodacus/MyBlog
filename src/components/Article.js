@@ -22,7 +22,7 @@ export default function Article({ html, bodyWidget, title, category, featuredIma
 					<img className={styles.alternateImage} src={featuredImagePath} alt={title} />
 				)}
 			</div>
-			{html ? <div className={styles.html} dangerouslySetInnerHTML={{ __html: html }}></div> : { bodyWidget }}
+			{html ? <div className={styles.html} dangerouslySetInnerHTML={{ __html: html }}></div> : bodyWidget}
 
 			{children}
 		</article>
