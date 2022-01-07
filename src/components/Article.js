@@ -4,30 +4,8 @@ import * as styles from "../styles/post-details.module.scss"
 
 import markdownIt from "markdown-it"
 // import markdownItKatex from "@iktakahiro/markdown-it-katex"
-import Prism from "prismjs"
-// customize markdown-it
-const options = {
-	html: true,
-	typographer: true,
-	linkify: true,
-	highlight: function (str, lang) {
-		// var languageString = "language-" + lang
-		if (Prism.languages[lang]) {
-			return `<pre class="language-${lang} line-numbers"><code class="language-${lang}">${Prism.highlight(str, Prism.languages[lang], lang)}</code></pre>`
-		} else {
-			return `<pre class="language-${lang} line-numbers"><code class="language-${lang}">${Prism.util.encode(str)}</code></pre>`
-		}
-	},
-}
-
-const customMarkdownIt = new markdownIt(options)
 export default function Article({ html, bodyWidget, title, category, featuredImage, date, publicURL, children }) {
 	const featuredImagePath = publicURL
-	let bodyRendered = ""
-	if (bodyWidget) {
-		bodyRendered = customMarkdownIt.render(bodyWidget.props?.value || "")
-	}
-	html = html || bodyRendered
 	return (
 		<article className={styles.details}>
 			<h1>{title}</h1>

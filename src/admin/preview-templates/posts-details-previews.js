@@ -1,11 +1,24 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Article from "../../components/Article"
-// require("prismjs/themes/prism-tomorrow.css")
-// require("prismjs/plugins/line-numbers/prism-line-numbers.css")
-// require("prismjs/plugins/show-language/prism-show-language.js")
-// const loadLanguages = require("prismjs/components/")
-// loadLanguages(["python"])
+
+import Prism from "prismjs"
+// customize markdown-it
+const options = {
+	html: true,
+	typographer: true,
+	linkify: true,
+	highlight: function (str, lang) {
+		// var languageString = "language-" + lang
+		if (Prism.languages[lang]) {
+			return `<pre class="language-${lang} line-numbers"><code class="language-${lang}">${Prism.highlight(str, Prism.languages[lang], lang)}</code></pre>`
+		} else {
+			return `<pre class="language-${lang} line-numbers"><code class="language-${lang}">${Prism.util.encode(str)}</code></pre>`
+		}
+	},
+}
+
+const customMarkdownIt = new markdownIt(options)
 
 const PostDetailsPreview = ({ entry, widgetFor, getAsset }) => {
 	//  id, html, excerpt, title, category, featuredImage, date, publicURL
@@ -16,17 +29,21 @@ const PostDetailsPreview = ({ entry, widgetFor, getAsset }) => {
 	console.log("featuredImage:", featuredImage)
 	const publicURL = featuredImage ? getAsset(featuredImage)?.toString() : null
 	const bodyWidget = widgetFor("body")
+	let bodyRendered = ""
+	if (bodyWidget) {
+		bodyRendered = customMarkdownIt.render(bodyWidget.props?.value || "")
+	}
 	return (
 		<Article
 			{...{
 				// id: entry.getIn(["data", "id"]),
-				bodyWidget,
 				// excerpt: entry.getIn(["data", "excerpt"]),
 				title,
 				category,
 				featuredImage,
 				date,
 				publicURL,
+				html: bodyRendered,
 			}}
 		></Article>
 	)
