@@ -36,8 +36,6 @@ const PostDetailsPreview = ({ entry, widgetFor, getAsset }) => {
 	return (
 		<Article
 			{...{
-				// id: entry.getIn(["data", "id"]),
-				// excerpt: entry.getIn(["data", "excerpt"]),
 				title,
 				category,
 				featuredImage,
