@@ -158,14 +158,19 @@ module.exports = {
 						}
 					}
 				`,
-				serialize: ({ site, allSitePage }) =>
-					allSitePage.edges.map(edge => {
-						return {
-							url: site.siteMetadata.siteUrl + edge.node.path,
-							changefreq: `daily`,
-							priority: 0.7,
-						}
-					}),
+				resolvePages: data => {
+					return data.allSitePage.edges.map(edge => edge.node)
+				},
+				resolvePagePath: ({ path }) => path,
+
+				serialize: ({ path }, tools) => {
+					console.log(tools)
+					return {
+						url: path,
+						changefreq: `daily`,
+						priority: 0.7,
+					}
+				},
 			},
 		},
 	],
