@@ -23,7 +23,7 @@ export default function PostsGrid({ posts }) {
 						<div style={{ flex: 1 }}>
 							<p>Date: {new Date(post.frontmatter.date).toLocaleDateString()}</p>
 						</div>
-						<Link to={"/posts/" + post.fields.slug}>
+						<Link to={post.fields.slug}>
 							<div className={styles.readMore}>Read More</div>
 						</Link>
 					</div>
