@@ -15,7 +15,7 @@ exports.createPages = async ({ graphql, actions }) => {
 	const nodes = data.allMarkdownRemark.nodes
 	nodes.forEach(node => {
 		actions.createPage({
-			path: `/posts/${node.fields?.slug}`,
+			path: `${node.fields?.slug}`,
 			component: path.resolve("./src/templates/post-details.js"),
 			context: { slug: node.fields?.slug },
 		})
@@ -47,7 +47,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 		createNodeField({
 			name: `slug`,
 			node,
-			value,
+			value='/posts/' + value,
 		})
 	}
 }
