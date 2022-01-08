@@ -173,5 +173,9 @@ module.exports = {
 				},
 			},
 		},
+
+		// redirects for old paths
+		`gatsby-redirect-from`,
+		`gatsby-plugin-meta-redirect`, // make sure to put last in the array
 	],
 }
