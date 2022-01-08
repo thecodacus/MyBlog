@@ -4,6 +4,8 @@ title: Face Detection Using OpenCV In Python | How To Setup OpenCV Python
 date: 2017-01-30T14:13:54.773Z
 category: computer vision
 featuredImage: /images/uploads/7cd53d36d121d839da9600ca055b01db.gif
+redirect_from:
+    - /2017/01/30/opencv-python-face-detection/
 ---
 
 Opencv is the most popular computer vision library, and today we are going to learn how to set up opencv, how to access your webcam and, how easily we can write a face detection program with just a few lines of code.

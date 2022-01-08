@@ -4,7 +4,10 @@ title: OpenCV Object Tracking by Colour Detection in Python
 date: 2017-08-13T17:50:14.907Z
 category: computer vision
 featuredImage: /images/uploads/f8b90e80-d3f0-11e9-98fa-dd887a89f392.jpeg
+redirect_from:
+    - /2017/08/13/opencv-object-tracking-colour-detection-python/
 ---
+
 Hi everyone, we have already seen lots of advanced detection and recognition techniques, but sometime its just better with old school colour detection techniques for multiple object tracking.
 
 So today we will be doing simple colour detection to detect some green objects and mark them in live camera view.
@@ -13,8 +16,8 @@ So today we will be doing simple colour detection to detect some green objects a
 
 we will be using only 2 libraries in this tutorial
 
-* OpenCV
-* Numpy
+-   OpenCV
+-   Numpy
 
 ## Lets Start Coding
 
@@ -25,8 +28,6 @@ import cv2
 import numpy as np
 ```
 
- 
-
 Now to detect color we need to know what is color in pixels of an image. Images are made of tiny dots of pixels each having a color and we can define those colors in terms of HSV -> Hue, Saturation, Value.
 
 The hue of a pixel is an angle from 0 to 359 the value of each angle decides the color of the pixel the order of the color is same but i reverse as the order in rainbow order from red to violet and again back to red
@@ -35,9 +36,9 @@ The Saturation is basically how saturated the color is, and the Value is how bri
 
 So the range of these are as follows
 
-* Hue is mapped – >0º-359º as \[0-179]
-* Saturation is mapped ->  0%-100% as \[0-255]
-* Value is 0-255 (there is no mapping)
+-   Hue is mapped – >0º-359º as \[0-179]
+-   Saturation is mapped ->  0%-100% as \[0-255]
+-   Value is 0-255 (there is no mapping)
 
 So what does that mean.. It means for hue if we select for example 20 it will take it as 40º in terms of degree,\
 And for saturation 255 means 100% saturate and 0 means 0% saturate
@@ -101,8 +102,6 @@ cv2.waitKey(10)
 
 Raw mask output
 
- 
-
 ## Filtering the Mask
 
 As we can see the output is quite great but we have some false positives in the mask. Those are the noises which are not good for object tracking. We have to clean to make out tracker work otherwise we will be seeing object marked in random places.
@@ -139,7 +138,7 @@ conts,h=cv2.findContours(maskFinal.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NON
 cv2.drawContours(img,conts,-1,(255,0,0),3)
 ```
 
-and now the variable ***conts***  is a list of contours (in this case only one contour is present but if multiple objects are there it will contain all the contours). we will loop through all the contours and put a rectangle over it and we will mark them with a number for object tracking
+and now the variable **_conts_**  is a list of contours (in this case only one contour is present but if multiple objects are there it will contain all the contours). we will loop through all the contours and put a rectangle over it and we will mark them with a number for object tracking
 
 ```python
 for i in range(len(conts)):
@@ -186,8 +185,6 @@ while True:
     cv2.waitKey(10)
 ```
 
- 
-
 ## The Complete Code For Multiple Object Tracking
 
 ```python
@@ -217,7 +214,7 @@ while True:
 
     maskFinal=maskClose
     conts,h=cv2.findContours(maskFinal.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
-    
+
     cv2.drawContours(img,conts,-1,(255,0,0),3)
     for i in range(len(conts)):
         x,y,w,h=cv2.boundingRect(conts[i])
@@ -229,8 +226,6 @@ while True:
     cv2.imshow("cam",img)
     cv2.waitKey(10)
 ```
-
- 
 
 ## The Complete Video Tutorial For Multiple Object Tracking
 

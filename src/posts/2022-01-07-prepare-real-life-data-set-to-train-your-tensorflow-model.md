@@ -4,7 +4,10 @@ title: Prepare Real life Data Set To Train Your Tensorflow Model
 date: 2017-08-30T19:05:50.730Z
 category: machine learning
 featuredImage: /images/uploads/8d2d943a-dogcat.png
+redirect_from:
+    - /2017/08/31/prepare-data-set-train-tensorflow-model/
 ---
+
 In the last few tutorial, we learned [what is a neural network](https://web.archive.org/web/20201028091951/https://thecodacus.com/neural-network-scratch-python-no-libraries/), and[ how to write your own network in python from scratch](https://web.archive.org/web/20201028091951/https://thecodacus.com/neural-network-scratch-python-no-libraries/). We learned[ how to use Tensorflow](https://web.archive.org/web/20201028091951/https://thecodacus.com/tensorflow-tutorial-ground-zero-start/) to quickly create a neural network and train it easily. Then we learned [how to use Tensorboard](https://web.archive.org/web/20201028091951/https://thecodacus.com/tensorboard-tutorial-visualize-networks-graphically/) to visualize the network for debugging and see real-time results. Now we are equipped with the basic knowledge, we can start building models for learning from real life data. But before that we need data. And we have to get the data in a format which we can feed into the network. In this tutorial, we will learn how to prepare data set for our network from real data.
 
 ## Let’s Get SomeData First
@@ -13,7 +16,7 @@ In this tutorial, we will be using a data set provided by Kaggle dog vs cat com
 
 You can get the dataset here -> https://www.kaggle.com/c/dogs-vs-cats/data
 
-the [train.zip](https://web.archive.org/web/20201028091951/https://www.kaggle.com/c/dogs-vs-cats/data) is a compressed folder containing 25000 images of dogs and cats. The file name is in this format ***\[dog/cat].\[sample number].jpg*** 
+the [train.zip](https://web.archive.org/web/20201028091951/https://www.kaggle.com/c/dogs-vs-cats/data) is a compressed folder containing 25000 images of dogs and cats. The file name is in this format **_\[dog/cat].\[sample number].jpg_**
 
 So by reading the filename, we can get if it’s a dog or cat. Let’s download this zip and extract it into our working directory where we are saving out python scripts.
 
@@ -29,13 +32,11 @@ Let’s add the libraries first
 
 ```python
 import cv2 # to load the images
-import numpy as np # to do matrix mnupulations 
+import numpy as np # to do matrix mnupulations
 from os.path import isfile, join # to manupulate file paths
 from os import listdir # get list of all the files in a directory
 from random import shuffle # shuffle the data (file paths)
 ```
-
- 
 
 So we are using opencv to load the image, we can also use PIL to load the image but I think opencv would be much easier to use. and we also want to do some image manipulations so we will use opencv for that.
 
@@ -58,15 +59,11 @@ def seperateData(data_dir):
                 os.remove(image_path)
 ```
 
- 
-
 This Function will create 2 folders named cat and dog in the data directory and move the files in their corresponding folder.
 
 As its one time job and we may not have to use it in future, again and again, we are making this function, not as a part of our dataset generator class.
 
-next, let’s create the ***DataSetGenerator*** class.
-
- 
+next, let’s create the **_DataSetGenerator_** class.
 
 ```python
 class DataSetGenerator:
@@ -97,21 +94,19 @@ class DataSetGenerator:
         return data_paths
 ```
 
- 
+In the above code, we created a class named **_DataSetGenerator,_**  we in the initializer we are taking the dataset directory path as an argument to list all the folders present in the dataset directory, then creating a list of the file paths in those individual directories using **_get_data_labels_** and **_get_data_paths_** method written below.
 
-In the above code, we created a class named ***DataSetGenerator,***  we in the initializer we are taking the dataset directory path as an argument to list all the folders present in the dataset directory, then creating a list of the file paths in those individual directories using ***get_data_labels*** and ***get_data_paths*** method written below.
+Now let’s see what inside **_get_data_labels_** and **get_data_paths** methods. Inside the **_get_data_labels_** method, we used “**_listdir”_** function to get a list of names for all the items in the data directory. So, in this case, our list will have two item “cat”, “dog”. These are the classes of our dataset.
 
-Now let’s see what inside ***get_data_labels*** and **get_data_paths** methods. Inside the ***get_data_labels*** method, we used “***listdir”*** function to get a list of names for all the items in the data directory. So, in this case, our list will have two item “cat”, “dog”. These are the classes of our dataset.
-
-Now inside the ***get_data_paths*** method, we again used the function ***“listdir”***  to get all the files and folders available in dataset directory. and looping then in a for loop. then we are checking each path if it’s pointing to a file or a folder. If it’s a file then we are splitting the path string with a ***dot ->***“.”  and checking the last token. So If it’s a jpg file the last token will be “jpg”. this is just to take the image files and to ignore any other files that are present in that directory like temp files.
+Now inside the **_get_data_paths_** method, we again used the function **_“listdir”_**  to get all the files and folders available in dataset directory. and looping then in a for loop. then we are checking each path if it’s pointing to a file or a folder. If it’s a file then we are splitting the path string with a **_dot ->_**“.”  and checking the last token. So If it’s a jpg file the last token will be “jpg”. this is just to take the image files and to ignore any other files that are present in that directory like temp files.
 
 Once we confirmed its a JPG file we added the entire path along with the data directory plus the class directory as the image path
 
-So we took the image file path and appended it in a list ***img_lists***. And we added that list to the main data_path list
+So we took the image file path and appended it in a list **_img_lists_**. And we added that list to the main data_path list
 
 Now the data_path list should contain two lists one with all the lists of image paths for dog and one with list of all the image paths for cat
 
-So we got all the image file paths and the corresponding labels, Now what? How to get the images?, We will be using the Python’s concept of ***generator***, and the concept of ***yield*** to create the mini-batches on the fly and delete them after we are done training our network on it. So it will help us the avoid loading the entire dataset into memory and running out of ram.
+So we got all the image file paths and the corresponding labels, Now what? How to get the images?, We will be using the Python’s concept of **_generator_**, and the concept of **_yield_** to create the mini-batches on the fly and delete them after we are done training our network on it. So it will help us the avoid loading the entire dataset into memory and running out of ram.
 
 ## Let’s Create A Mini-Batch Generator
 
@@ -155,17 +150,15 @@ class DataSetGenerator:
                 labels=[]
 ```
 
- 
+In this **_get_mini_batches_** method, we are creating the generator. We are taking **_batch_size_** , output **_image_size_** and a flag **_allchannel_** to check whether we want to use all the 3 channel RGB or just gray scale image
 
-In this ***get_mini_batches*** method, we are creating the generator. We are taking ***batch_size*** , output ***image_size*** and a flag ***allchannel*** to check whether we want to use all the 3 channel RGB or just gray scale image
-
-We first divided the ***batch_size*** in the batch_size for each class, so that we take an equal amount of samples from each class. and a ***counter*** for the current iteration for each class.
+We first divided the **_batch_size_** in the batch_size for each class, so that we take an equal amount of samples from each class. and a **_counter_** for the current iteration for each class.
 
 Then we created two empty lists images and labels, and started an infinite while loop, we will break this loop when none of the classes have any images left to train. Inside the while loop we initiate an inner for loop to get images from each and every class one by one
 
-So before loading any images, we have to check if that class has any image_path left in the list, so we checked if the length of that list of that particular class is less than our ***counter*** value. if it is then we considered it as empty and continuing to the next class. if it’s not we are setting the empty flag as False and loading the image using cv2.imread() method.
+So before loading any images, we have to check if that class has any image_path left in the list, so we checked if the length of that list of that particular class is less than our **_counter_** value. if it is then we considered it as empty and continuing to the next class. if it’s not we are setting the empty flag as False and loading the image using cv2.imread() method.
 
-we want all our sample images to be the same size, So we need to resize them to a square image without changing their aspect ratio. we do that we are going to use another function named ***resizeAndPad,*** that we will implement later using OpenCV.
+we want all our sample images to be the same size, So we need to resize them to a square image without changing their aspect ratio. we do that we are going to use another function named **_resizeAndPad,_** that we will implement later using OpenCV.
 
 For the allchannel flag if it’s false then we are converting the image to gray scale using cv2.cvtColor() method,
 
@@ -175,15 +168,11 @@ Next, we are checking if the value of empty is true that means all the lists are
 
 Now, each time the counter is a multiple of the each_batch_size  which is the batch size for an individual class, we will yield the results and after the yield, we will delete them to release the memory and continue to append the rest of the data in the lists for next call.
 
- 
-
 ## Creating The Image Resizer
 
-We used the image resizer method named ***resizeAndPad()** in* our the previous method, we will need to define that our class.
+We used the image resizer method named **\*resizeAndPad()** in\* our the previous method, we will need to define that our class.
 
 here it is
-
- 
 
 ```python
 class DataSetGenerator:
@@ -229,16 +218,16 @@ class DataSetGenerator:
 
 Python
 
-So here first we checked if we are shrinking the image or enlarging. Cuz the cv2.INTER_AREA method is better for shrinking the image where as  ***cv2.INTER_CUBIC***  is better for enlarging the image.
+So here first we checked if we are shrinking the image or enlarging. Cuz the cv2.INTER_AREA method is better for shrinking the image where as  **_cv2.INTER_CUBIC_**  is better for enlarging the image.
 
 Next, we are checking if it’s a horizontal image or a vertical image. and padding the image with zeros so that it becomes a square image.
 
-Then we applied the ***cv2.resize***  method to scale the image according to the given size.
+Then we applied the **_cv2.resize_**  method to scale the image according to the given size.
 
 ## We are done!!
 
 That It we are done now we can use this class to generate mini batches for our tensorflow model.\
-If we run the ***separate***  method with argument ***“./train”*** where it’s the directory where dog vs cat training images are stored
+If we run the **_separate_**  method with argument **_“./train”_** where it’s the directory where dog vs cat training images are stored
 
 it will separate the images of dogs and cat into two separate folders, and we only need that for one time.
 
@@ -297,8 +286,8 @@ class DataSetGenerator:
             data_paths.append(img_lists)
         return data_paths
 
-    # to save the labels its optional incase you want to restore the names from the ids 
-    # and you forgot the names or the order it was generated 
+    # to save the labels its optional incase you want to restore the names from the ids
+    # and you forgot the names or the order it was generated
     def save_labels(self, path):
         pickle.dump(self.data_labels, open(path,"wb"))
 
@@ -377,6 +366,6 @@ if __name__=="__main__":
     seperateData("./train")
 ```
 
-- - -
+---
 
-##### [***In the next post, we will see how can we use this to train our*** tensorflow](https://web.archive.org/web/20201028091951/https://thecodacus.com/cnn-image-classifier-using-tensorflow/)***[ model. ](https://web.archive.org/web/20201028091951/https://thecodacus.com/cnn-image-classifier-using-tensorflow/)Thank you very much for reading***
+##### [**_In the next post, we will see how can we use this to train our_** tensorflow](https://web.archive.org/web/20201028091951/https://thecodacus.com/cnn-image-classifier-using-tensorflow/)**_[ model. ](https://web.archive.org/web/20201028091951/https://thecodacus.com/cnn-image-classifier-using-tensorflow/)Thank you very much for reading_**

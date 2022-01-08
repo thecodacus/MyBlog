@@ -4,7 +4,10 @@ title: Face Recognition – OpenCV Python | Dataset Generator
 date: 2017-01-30T15:47:46.247Z
 category: machine learning
 featuredImage: /images/uploads/shutterstock_504120676.jpeg
+redirect_from:
+    - /2017/01/30/opencv-face-recognition-python-part1/
 ---
+
 In my last post we learnt how to setup opencv and python and wrote this code to detect faces in the frame. Now lets take it to the next level, lets create a face recognition program, which not only detect face but also recognize the person and tag that person in the frame
 
 ## Lets Do Face Recognition
@@ -21,11 +24,11 @@ In this post we are going to see how to create a program to ganerate dataset for
 
 ## Dataset Generator[](https://web.archive.org/web/20201028091519/https://thecodacus.com/opencv-face-recognition-in-python-part-1/)
 
-Lets create the dataset generator script, open your python ***IDLE*** and create a new file and save it in your project folder and make sure you also have the ***haarcascade_frontalface_default.xml*** file in the same folderJust like in the previous post we will need to do the following first:
+Lets create the dataset generator script, open your python **_IDLE_** and create a new file and save it in your project folder and make sure you also have the **_haarcascade_frontalface_default.xml_** file in the same folderJust like in the previous post we will need to do the following first:
 
-* cv2 library (opencv library)
-* create a video capture object
-* cascadeClassifier object
+-   cv2 library (opencv library)
+-   create a video capture object
+-   cascadeClassifier object
 
 So here it is in form of python code
 
@@ -36,13 +39,13 @@ detector=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 ```
 
 Our dataset generator is going to capture few sample faces of one person from the live video frame\
-and assign a ID to it and it will save those samples in a folder which we are going to create now and we will name it ***dataSet***
+and assign a ID to it and it will save those samples in a folder which we are going to create now and we will name it **_dataSet_**
 
-So create a folder named ***dataSet*** in the same location where you have saved your .py scriptWe are going to follow this naming convention for the sample images to make sure they dont mixed up with other person’s image samples\
+So create a folder named **_dataSet_** in the same location where you have saved your .py scriptWe are going to follow this naming convention for the sample images to make sure they dont mixed up with other person’s image samples\
 **\
-*User.\[ID].\[SampleNumber].jpg***for example if the user id is 2 and its 10th sample from the sample list then the file name will be\
+_User.\[ID].\[SampleNumber].jpg_**for example if the user id is 2 and its 10th sample from the sample list then the file name will be\
 **\
-*User.2.10.jpg***
+_User.2.10.jpg_**
 
 Why this format?? well we can easily get which user’s face it is from its file name while loading the image for the training the recognizer
 
@@ -53,7 +56,7 @@ Id=raw_input('enter your id: ')
 sampleNum=0
 ```
 
-Now let start the main loop, we will take 20 samples from the video feed and will save it in the ***dataSet*** folder that we created previously
+Now let start the main loop, we will take 20 samples from the video feed and will save it in the **_dataSet_** folder that we created previously
 
 ```python
 while(True):
@@ -79,8 +82,8 @@ while(True):
     faces = detector.detectMultiScale(gray, 1.3, 5)
     for (x,y,w,h) in faces:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
-        
-        #incrementing sample number 
+
+        #incrementing sample number
         sampleNum=sampleNum+1
         #saving the captured face in the dataset folder
         cv2.imwrite("dataSet/user."+Id+'.'+str(sampleNum)+".jpg",gray[y:y+h,x:x+w])
@@ -92,7 +95,7 @@ while(True):
 
 So we added this two lines there to get the sample number and save the face in jpg format with our naming convention
 
-and for those who dont know what we captured the face, its this ***“gray\[y:y+h,x:x+w]”*** part where x,y is the top left coordinate of the face rectangle and h,w is the height and the weight of the face in terms of pixels
+and for those who dont know what we captured the face, its this **_“gray\[y:y+h,x:x+w]”_** part where x,y is the top left coordinate of the face rectangle and h,w is the height and the weight of the face in terms of pixels
 
 but this code will take samples vary rapidly like 20 samples in a second.. but we dont want that, we want to capture faces from different angles and for that it needs to be slow.
 
@@ -106,14 +109,14 @@ while(True):
     faces = detector.detectMultiScale(gray, 1.3, 5)
     for (x,y,w,h) in faces:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
-        
-        #incrementing sample number 
+
+        #incrementing sample number
         sampleNum=sampleNum+1
         #saving the captured face in the dataset folder
         cv2.imwrite("dataSet/User."+Id +'.'+ str(sampleNum) + ".jpg", gray[y:y+h,x:x+w]) #
 
         cv2.imshow('frame',img)
-    #wait for 100 miliseconds 
+    #wait for 100 miliseconds
     if cv2.waitKey(100) & 0xFF == ord('q'):
         break
     # break if the sample number is morethan 20
@@ -136,13 +139,11 @@ If we run this code now then we will see that it will capture faces from the liv
 
 ![opencv Detected Face image output](/images/uploads/image2.jpeg)
 
-
-
 ![Dataset generated](/images/uploads/image3.jpeg)
 
 looks good… Now we have our dataset we can now train the recognizer to learn the faces from this dataset\
 **\
-*In the next post we will create the trainer portion of the code***
+_In the next post we will create the trainer portion of the code_**
 
 ## NOW THE COMPLETE CODE IN ONE PIECE[¶](https://web.archive.org/web/20201028091519/https://thecodacus.com/opencv-face-recognition-in-python-part-1/)
 
@@ -159,14 +160,14 @@ while(True):
     faces = detector.detectMultiScale(gray, 1.3, 5)
     for (x,y,w,h) in faces:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
-        
-        #incrementing sample number 
+
+        #incrementing sample number
         sampleNum=sampleNum+1
         #saving the captured face in the dataset folder
         cv2.imwrite("dataSet/User."+Id +'.'+ str(sampleNum) + ".jpg", gray[y:y+h,x:x+w])
 
         cv2.imshow('frame',img)
-    #wait for 100 miliseconds 
+    #wait for 100 miliseconds
     if cv2.waitKey(100) & 0xFF == ord('q'):
         break
     # break if the sample number is morethan 20

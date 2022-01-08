@@ -4,16 +4,17 @@ title: Build Neural Network From Scratch in Python (no libraries)
 date: 2017-08-17T18:00:28.237Z
 category: machine learning
 featuredImage: /images/uploads/file-20201210-18-elk4m.jpeg
+redirect_from:
+    - /2017/08/14/neural-network-scratch-python-no-libraries/
 ---
-Hello, my dear readers, In this post I am going to show you how you can write your own neural network ***without the help of any libraries*** yes we are not going to use any libraries and by that I mean any external libraries like tensorflow or theano. I will still be using math library and numpy. but that will be very minimum
+
+Hello, my dear readers, In this post I am going to show you how you can write your own neural network **_without the help of any libraries_** yes we are not going to use any libraries and by that I mean any external libraries like tensorflow or theano. I will still be using math library and numpy. but that will be very minimum
 
 What will be the benefit of this? well, it will be more efficient to use a neural network library if you want to do some serious work and you don’t want to put your mind write a NN. but if you want to learn how the neural network is working under the hood then you might what to write your own small code to see its insights
 
 #### Before starting Let us Have a Look What is Neural Network
 
 <iframe width="600" height="400" style="width:100%;" src="https://www.youtube.com/embed/hENZrj0qxqg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
 
 ## The Building Blocks
 
@@ -29,9 +30,9 @@ each and every neuron is connected to all the neurons in its previous layer. and
 
 So looking at this out basic building blocks will be
 
-* Connection -> will keep information between the connection of two neuron
-* Neuron -> will get signals from connected neurons and produce an output
-* Network -> will create a network of the neurons and flow data in the layers
+-   Connection -> will keep information between the connection of two neuron
+-   Neuron -> will get signals from connected neurons and produce an output
+-   Network -> will create a network of the neurons and flow data in the layers
 
 ## Let’s Code a Neural Network From Scratch
 
@@ -41,8 +42,6 @@ okay then without wasting any more time lets start the coding.  we will need tw
 import math
 import numpy as np
 ```
-
- 
 
 ### Now let’s create Connection class
 
@@ -54,11 +53,7 @@ class Connection:
         self.dWeight = 0.0
 ```
 
- 
-
 That’s it!!.. the connection object will only hold information about the connected neuron, weight of the connection and the delta weight for momentum.
-
- 
 
 ### Neuron Class
 
@@ -80,11 +75,9 @@ class Neuron:
                 self.dendrons.append(con)
 ```
 
- 
-
 so here we created a neuron class and we defined the initializer with a list of dendrons (connections), error, gradient to calculate error distribution of the connected neurons and the output. it is taking a layer as its input which will be the previous layer. for input and bias neurons the previous layer is None.
 
-Once a neuron is created it has to create connections to its previous layer neurons. which is stored in the dendrons list. and now we have some static variables ***eta, Alpha*** which will be the learning rate and momentum factor of the neurons
+Once a neuron is created it has to create connections to its previous layer neurons. which is stored in the dendrons list. and now we have some static variables **_eta, Alpha_** which will be the learning rate and momentum factor of the neurons
 
 Now we need some basic functions for our Neuron class
 
@@ -111,7 +104,7 @@ class Neuron:
         return self.output
 ```
 
-the method ***addError*** will be used to accumulate error sent from all the neurons in the next layer during backpropagation. ***sigmoid*** is our activation function and ***dSigmoid*** is the derivation of the sigmoid function it will be used to calculate the gradient of the neuron during backpropagation. others are simply getters and setters.
+the method **_addError_** will be used to accumulate error sent from all the neurons in the next layer during backpropagation. **_sigmoid_** is our activation function and **_dSigmoid_** is the derivation of the sigmoid function it will be used to calculate the gradient of the neuron during backpropagation. others are simply getters and setters.
 
 let’s do the feedforward for a single neuron
 
@@ -128,9 +121,7 @@ class Neuron:
         self.output = self.sigmoid(sumOutput)
 ```
 
- 
-
-In the feedforward method, we are simply checking if there is any previously connected neurons are present. if not then it’s an input or bias neuron and does not need to do and feedforward. But if there is any neuron it’s getting the output of the connected neurons one by one and multiplying it with the connection’s weight which in this case ***dendron.weight.*** summing them up and passing it through the activation function ***sigmoid*** and that the output.
+In the feedforward method, we are simply checking if there is any previously connected neurons are present. if not then it’s an input or bias neuron and does not need to do and feedforward. But if there is any neuron it’s getting the output of the connected neurons one by one and multiplying it with the connection’s weight which in this case **_dendron.weight._** summing them up and passing it through the activation function **_sigmoid_** and that the output.
 
 Let define the back Propagation method for a single neuron
 
@@ -148,9 +139,7 @@ class Neuron:
         self.error = 0
 ```
 
- 
-
-here in this method, we are using the ***error x d.(output)** *  to calculate the gradient. The gradient will decide the direction we need to alter the weight of a connection and output of the connected neuron will decide how much we need to alter the weight to minimize the error
+here in this method, we are using the **\*error x d.(output)** \*  to calculate the gradient. The gradient will decide the direction we need to alter the weight of a connection and output of the connected neuron will decide how much we need to alter the weight to minimize the error
 
 so the change in weight for a single connection will be
 
@@ -223,11 +212,9 @@ class Neuron:
         self.error = 0;
 ```
 
- 
-
 ## The Network Class
 
-Now lets create the ***Network*** class
+Now lets create the **_Network_** class
 
 ```python
 class Network:
@@ -245,15 +232,13 @@ class Network:
             self.layers.append(layer)
 ```
 
- 
-
-So this is the initializer of the Network class. it’s taking an argument as input which is the network ***topology,***  this will be a list of numbers. For example, a topology = \[2,5,1] represents there are 3 layers in the network. First second and third layer containing 2,5,1 neurons respectively.  the first layer is always the input layer and last is always the output layer rest of them are hidden layers
+So this is the initializer of the Network class. it’s taking an argument as input which is the network **_topology,_**  this will be a list of numbers. For example, a topology = \[2,5,1] represents there are 3 layers in the network. First second and third layer containing 2,5,1 neurons respectively.  the first layer is always the input layer and last is always the output layer rest of them are hidden layers
 
 So in the neuron class, we created an internal list called layers and we filled it with neurons according to the number of neurons specified in the topology
 
-If its the first layer, then there is no previous layer thus the neurons were initialized with None parameters ***Neuron(None).***  at the end of the layer, we are adding a bias neuron with None parameter (no previous layer for bias)  and setting its output as 1
+If its the first layer, then there is no previous layer thus the neurons were initialized with None parameters **_Neuron(None)._**  at the end of the layer, we are adding a bias neuron with None parameter (no previous layer for bias)  and setting its output as 1
 
-at last appending the ***layer*** the ***self.layers*** list
+at last appending the **_layer_** the **_self.layers_** list
 
 Now we need some helper methods in the Network class
 
@@ -275,8 +260,6 @@ class Network:
         return err
 
 ```
-
- 
 
 #### Setting the input
 
@@ -300,7 +283,7 @@ class Network:
                 neuron.feedForword();
 ```
 
-The feed forward method nor the network class is simple. We just have to call ***thefeedForword*** method  each and every neuron in the network from input to output layer in order
+The feed forward method nor the network class is simple. We just have to call **_thefeedForword_** method  each and every neuron in the network from input to output layer in order
 
 #### Back Propagate The Network
 
@@ -320,7 +303,7 @@ For the back propagation. its same as feed forward but from output to input we h
 
 So for the output neuron, we have to set the error manually for each neuron in the layer. The error for each neuron will be target minus the output of that neuron
 
-now we need to call the ***backPropagate***  of each and every neuron in the network from the output layer to the input layer in order
+now we need to call the **_backPropagate_**  of each and every neuron in the network from the output layer to the input layer in order
 
 #### Get Results from the network
 
@@ -348,11 +331,9 @@ class Network:
         return output
 ```
 
- 
-
 We are getting the results in a list from the last layer in the network and popping out the last output which is the output of a bias neuron
 
-and optionally I created another method  ***getThResults*** which is basically the thresholded version of the output on 0.5 as threshold
+and optionally I created another method  **_getThResults_** which is basically the thresholded version of the output on 0.5 as threshold
 
 #### Lets Test The Network
 
@@ -383,14 +364,14 @@ def main():
         b = input("type 2nd input :")
         net.setInput([a, b])
         net.feedForword()
-        print net.getThResults() 
+        print net.getThResults()
 
 
 if __name__ == '__main__':
     main()
 ```
 
-To test the network we are going to train to be a ***half adder.***  which is as follows
+To test the network we are going to train to be a **_half adder._**  which is as follows
 
 [![](https://web.archive.org/web/20201112015008im_/https://i0.wp.com/142.93.251.188/wp-content/uploads/2017/08/half-adder2-300x106.jpg?resize=492%2C174)](https://web.archive.org/web/20201112015008/https://thecodacus.com/neural-network-scratch-python-no-libraries/half-adder2/)
 
@@ -398,11 +379,11 @@ Where A, B is the input and Sum, Carry-out is the output
 
 In the main function we defined a network topology to be \[2,3,2], we set the learning rate to be0.09 and alpha to be 0.015. we prepared the inputs and corresponding outputs.
 
-In the while we are training the network for each input which is ***setInput-> feedForward-> backPropagate*** until the error is less than a threshold value
+In the while we are training the network for each input which is **_setInput-> feedForward-> backPropagate_** until the error is less than a threshold value
 
 In the next while loop, we are taking input from the console and predicting the output using the network which is
 
-***setInput-> feedForward->getThResults***
+**_setInput-> feedForward->getThResults_**
 
 ## We just created a Neural Network From Scratch
 
@@ -568,7 +549,5 @@ if __name__ == '__main__':
 ```
 
 ## Video Tutorial For Neural Network From Scratch
-
-
 
 <iframe width="600" height="400" style="width:100%;" src="https://www.youtube.com/embed/O8BXapqL5lA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

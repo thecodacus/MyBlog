@@ -4,20 +4,23 @@ title: TensorFlow Tutorial Ground Zero | How To Start
 date: 2017-08-16T18:52:06.821Z
 category: machine learning
 featuredImage: /images/uploads/maxresdefault.jpeg
+redirect_from:
+    - /2017/08/17/tensorflow-tutorial-ground-zero-start/
 ---
+
 Hey Everyone in my last post I showed how we can write a simple neural network program in python from scratch, just to have a better understanding of how they actually work under the hood. If you haven’t checked it yet please [click here](https://web.archive.org/web/20201125055035/https://thecodacus.com/neural-network-scratch-python-no-libraries/) to check that out first. Okay so in this post I prepared a complete basics yet well-informed tensorflow tutorial, where we will see how we can use Tensorflow to write the network we did in our previous post. So let’s get started.
 
-*Info: Join This newly created [Slack Community](https://web.archive.org/web/20201125055035/https://join.slack.com/t/codacus/shared_invite/MjI4MDU5NzEzNzE3LTE1MDI5NzIzNjEtZGZlNDMxNjczYg) for everyone to discuss about ML Computer Vision and Artificial Intelligence* 
+_Info: Join This newly created [Slack Community](https://web.archive.org/web/20201125055035/https://join.slack.com/t/codacus/shared_invite/MjI4MDU5NzEzNzE3LTE1MDI5NzIzNjEtZGZlNDMxNjczYg) for everyone to discuss about ML Computer Vision and Artificial Intelligence_
 
 ## Setting up Tensorflow
 
 Tensorflow website has a complete tutorial guide to install tensorflow. which is available for linux, macOS and Windows
 
-check this link for that ***[www.tensorflow.org/install/](https://web.archive.org/web/20201125055035/https://www.tensorflow.org/install/)***
+check this link for that **_[www.tensorflow.org/install/](https://web.archive.org/web/20201125055035/https://www.tensorflow.org/install/)_**
 
-In all my previous post I tried to write my posts in a way that it can be done in any OS like Linux Mac or Windows. but unfortunately you might face some issue with windows so I would suggest either ***dual-boot to ubuntu***  or ***use Virtual box to create virtual machine and load ubuntu in it*** ,
+In all my previous post I tried to write my posts in a way that it can be done in any OS like Linux Mac or Windows. but unfortunately you might face some issue with windows so I would suggest either **_dual-boot to ubuntu_**  or **_use Virtual box to create virtual machine and load ubuntu in it_** ,
 
-***Update: I have created A video to install Tensorflow. and this will work on all the platforms*** 
+**_Update: I have created A video to install Tensorflow. and this will work on all the platforms_**
 
 <iframe width="600" height="400" style="width:100%;" src="https://www.youtube.com/embed/gWfVwnOyG78" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -32,18 +35,16 @@ sess = tf.Session()
 print(sess.run(hello))
 ```
 
-If there is no error, you should get ***“Hello, Codacus”*** in the output
-
- 
+If there is no error, you should get **_“Hello, Codacus”_** in the output
 
 ## TensorFlow Basic Concepts
 
 There are the main concept in tensorflow that we need to understand.
 
-* placeholders
-* variables
-* operations
-* session
+-   placeholders
+-   variables
+-   operations
+-   session
 
 these are the three things we will be dealing with when working with tensorflow. lets discuss about these one by one individually
 
@@ -58,7 +59,7 @@ inputs=tf.placeholder('float',[None,2],name='Input')
 targets=tf.placeholder('float',name='Target')
 ```
 
-So we created two placeholders the data type that will feed to the placeholder is ***float*** , 2nd parameter is the shape of input. In tensorflow data flows through the network in form of matrix.
+So we created two placeholders the data type that will feed to the placeholder is **_float_** , 2nd parameter is the shape of input. In tensorflow data flows through the network in form of matrix.
 
 so lets say we have 3 input neurons.
 
@@ -73,19 +74,19 @@ Now lets say we have 4 sets of inputs for example
 [5,4,3]
 ```
 
-and we want to feed all the three inputs in a batch the shape on the input will be ***\[4,3]***
+and we want to feed all the three inputs in a batch the shape on the input will be **_\[4,3]_**
 
-Now lets say we don’t know how many input set we are going to feed at the same time. it can be 1 it can be 100 sets at a time. So we specify that with ***None***.
+Now lets say we don’t know how many input set we are going to feed at the same time. it can be 1 it can be 100 sets at a time. So we specify that with **_None_**.
 
 if we set the input shape of the placeholder as \[None,3] then it will be able to take any sets of data in a single shot. that is what we did in out earlier code.
 
 In the second case I didn’t select any shape, in this case it will accept any shape. but there is a chance of getting error in runtime if the data the network is expecting has a different shape than the data we provided in the placeholder.
 
-The third parameter I used is ***name***  it is not so important for the network to work. but it will be useful to give a name to every node of the network. This will help up to identify the nodes when we will be checking the network diagram in ***Tensor board*** 
+The third parameter I used is **_name_**  it is not so important for the network to work. but it will be useful to give a name to every node of the network. This will help up to identify the nodes when we will be checking the network diagram in **_Tensor board_**
 
 ### Variables
 
-Variables in tensorflow are different from regular variables, unlike placeholders ***we will never set any specific values in these, nor use it for storing any data***. We will be using it to make connections between layers. and ***tensorflow itself will use these variables to tune the network*** during training. So these are variable for tensorflow to play with. These are often called trainable parameters.
+Variables in tensorflow are different from regular variables, unlike placeholders **_we will never set any specific values in these, nor use it for storing any data_**. We will be using it to make connections between layers. and **_tensorflow itself will use these variables to tune the network_** during training. So these are variable for tensorflow to play with. These are often called trainable parameters.
 
 Lets create some Variables
 
@@ -94,17 +95,13 @@ weight1=tf.Variable(tf.random_normal(shape=[2,3],stddev=0.02),name="Weight1")
 biases1=tf.Variable(tf.random_normal(shape=[3],stddev=0.02),name="Biases1")
 ```
 
-So we have two variables here. the first parameter in here is the values we want it initialize it with. in this case we initialized the first one as 2×3 matrix with random values with variation of +/- 0.02. for the shape the ***first one is the number of input connection*** that the layer will receive. and the ***2nd one is the number of output connection*** that the layer will produce for the next layer.
+So we have two variables here. the first parameter in here is the values we want it initialize it with. in this case we initialized the first one as 2×3 matrix with random values with variation of +/- 0.02. for the shape the **_first one is the number of input connection_** that the layer will receive. and the **_2nd one is the number of output connection_** that the layer will produce for the next layer.
 
 here is an example
-
-
 
 ![Neural Network](/images/uploads/architecture.jpeg)
 
 For the bias I only selected 3 as shape because for the first bias neurons there is no input and it has 3 output connections.
-
- 
 
 ### Operations
 
@@ -168,17 +165,17 @@ cost=tf.reduce_mean(cost)
 optimizer=tf.train.AdamOptimizer().minimize(cost)
 ```
 
-The method ***softmax_cross_entropy_with_logits*** will take the output of the neuron and target placeholder where we will put out expected outputs. then it will calculate the error for each and every neuron in the layer.
+The method **_softmax_cross_entropy_with_logits_** will take the output of the neuron and target placeholder where we will put out expected outputs. then it will calculate the error for each and every neuron in the layer.
 
-***Update:*** I changes the cost function to ***tf.squared_difference()***  which is similar to the same squared difference, and best suitable for this problem which is not a classification problem,  ***tf.squared_difference***  takes two input fitsr is the target value and second is the predicted value.
+**_Update:_** I changes the cost function to **_tf.squared_difference()_**  which is similar to the same squared difference, and best suitable for this problem which is not a classification problem,  **_tf.squared_difference_**  takes two input fitsr is the target value and second is the predicted value.
 
-next we took that error in a variable ***cost*** and put operated ***reduce_mean***  function on it and stored it in ***cost*** variable again. the ***reduce_mean***  is taking that array of errors and calculating the average of them and returning a single value for the error.
+next we took that error in a variable **_cost_** and put operated **_reduce_mean_**  function on it and stored it in **_cost_** variable again. the **_reduce_mean_**  is taking that array of errors and calculating the average of them and returning a single value for the error.
 
-finally we are creating the optimizer to called ***AdamOptimizer*** to minimize the error ***cost .*** It’s basically do the same back propagation using the cost as starting error and propagate that error backwards while fixing the weights a little bit every time. Almost similar that we did in our own neural network in the last post.
+finally we are creating the optimizer to called **_AdamOptimizer_** to minimize the error **_cost ._** It’s basically do the same back propagation using the cost as starting error and propagate that error backwards while fixing the weights a little bit every time. Almost similar that we did in our own neural network in the last post.
 
 ### Session
 
-Till now what we did is, we described tensorflow what is the structure of the network and how data will flow. but the network is still not running and no operation has been done yet. So to run the network we need to start a ***tensorflow session.***  any actual calculation will happen inside a session what ever tensorflow operation we perform will actually happen after we start the session and run it.
+Till now what we did is, we described tensorflow what is the structure of the network and how data will flow. but the network is still not running and no operation has been done yet. So to run the network we need to start a **_tensorflow session._**  any actual calculation will happen inside a session what ever tensorflow operation we perform will actually happen after we start the session and run it.
 
 So before starting the session lets create the data set first. I am going to make it work as another binary gate XOR gate
 
@@ -209,15 +206,15 @@ with tf.Session() as sess:
         print(i,error)
 ```
 
-So here we started a session and named it ***sess .*** After we setup the session the first thing we need to do is we need to initialize all the tensorflow variables that we created using  ***tf.global_variables_initializer().run() .*** 
+So here we started a session and named it **_sess ._** After we setup the session the first thing we need to do is we need to initialize all the tensorflow variables that we created using  **_tf.global_variables_initializer().run() ._**
 
-Now we started a for loop to repeat our training. now inside the loop we are using ***sess.run()*** . The first parameter in this is a list of operations that we want to do. In this case I want to know the error for each training and I also want to Optimize the network. So I put cost and the optimizer variable in the list.
+Now we started a for loop to repeat our training. now inside the loop we are using **_sess.run()_** . The first parameter in this is a list of operations that we want to do. In this case I want to know the error for each training and I also want to Optimize the network. So I put cost and the optimizer variable in the list.
 
-Te second parameter is the ***feed_dict*** . In this argument we will tell tensorflow from where it will take the data for all its ***placeholders***. So we have 2 ***placeholders*** in our network ***inputs*** and ***targets*** we have to tell tensorflow from where it should take its data. We put that information in the ***feed_dict*** parameter.
+Te second parameter is the **_feed_dict_** . In this argument we will tell tensorflow from where it will take the data for all its **_placeholders_**. So we have 2 **_placeholders_** in our network **_inputs_** and **_targets_** we have to tell tensorflow from where it should take its data. We put that information in the **_feed_dict_** parameter.
 
-for ***inputs*** we set ***inp*** . and for ***targets*** we set ***out .*** Therefore we set ***feed_dict ={inputs:inp , targets:out}***
+for **_inputs_** we set **_inp_** . and for **_targets_** we set **_out ._** Therefore we set **_feed_dict ={inputs:inp , targets:out}_**
 
-and now the output of ***sess.run()*** is the output of the individual operation that we put inside the list. that is the ***cost*** and the ***optimizer***. the ***cost*** returns the average ***error*** and the ***optimizer*** doesn’t return any value so we set it as ***_*** to ignore it .
+and now the output of **_sess.run()_** is the output of the individual operation that we put inside the list. that is the **_cost_** and the **_optimizer_**. the **_cost_** returns the average **_error_** and the **_optimizer_** doesn’t return any value so we set it as **_\__** to ignore it .
 
 and finally we are printing those values.
 
@@ -240,8 +237,6 @@ with tf.Session() as sess:
         print(prediction)
 ```
 
- 
-
 So here we go. after training we can test the network by running the output node and supplying data to the inputs placeholder  and finally printing it
 
 ## Saving The Session for later
@@ -261,8 +256,6 @@ with tf.Session() as sess:
 ```
 
 At the end of the for loop after the training we are saving the session with a file name “model.ckpt”. so now we can load it for later use.
-
- 
 
 ## Restoring/Loading the session
 

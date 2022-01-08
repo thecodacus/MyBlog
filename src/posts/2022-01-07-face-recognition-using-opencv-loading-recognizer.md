@@ -4,7 +4,10 @@ title: Face Recognition Using OpenCV | Loading Recognizer
 date: 2017-02-21T16:27:04.754Z
 category: computer vision
 featuredImage: /images/uploads/dormakaba-blog-post-pictures-_-1024-x-683-83.webp
+redirect_from:
+    - /2017/02/21/face-recognition-loading-recognizer/
 ---
+
 In my previous post we learnt to train a recognizer using a dataset, in this post we are loading recognizer to see how we can use that recognizer to recognize faces.
 
 If you are following my previous posts then you already have the trained recognizer with you inside a folder named “trainner” and “trainner.yml” file inside it. Now we are going to use that training data to recognize some faces we previously trained .
@@ -45,7 +48,7 @@ Python
 Next we need a “font” that’s because we are going to write the name of that person in the image so we need a font for the text
 
 ```python
-font = cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_SIMPLEX, 1, 1, 0, 1, 1) 
+font = cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_SIMPLEX, 1, 1, 0, 1, 1)
 ```
 
 Okay so the first parameter is the font name, 2nd and 3rd is the horizontal and the vertical scale,4rth is shear (like italic), 5th is thickness of line, 6th is line type
@@ -56,11 +59,11 @@ So we have all setup
 
 Lets start the main loop and do the following basic steps
 
-* Starts capturing frames from the camera object
-* Convert it to Gray Scale
-* Detect and extract faces from the images
-* Use the recognizer to recognize the Id of the user
-* Put predicted Id/Name and Rectangle on detected face
+-   Starts capturing frames from the camera object
+-   Convert it to Gray Scale
+-   Detect and extract faces from the images
+-   Use the recognizer to recognize the Id of the user
+-   Put predicted Id/Name and Rectangle on detected face
 
 ```python
 while True:
@@ -86,11 +89,7 @@ So its pretty similar to the face detection code the only difference is the foll
 in the above two line the recognizer is predicting the user Id and confidence of the prediction respectively\
 in the next line we are writing the User ID in the screen below the face, which is (x, y+h) coordinate
 
- 
-
 ## Just Little Finishing Touch (For Unknown Faces)
-
- 
 
 Now with this we are pretty much done we can add some more finishing touch like its showing user Id instead of the name,\
 and it cant handle unknown faces,
@@ -109,8 +108,6 @@ So to add this additional features we can do the following,
         cv2.cv.PutText(cv2.cv.fromarray(im),str(Id), (x,y+h),font, 255)
 ```
 
- 
-
 ## Now Some Cleanup
 
 ```python
@@ -123,8 +120,6 @@ Now that everything is done, we need to close the camera and the windows. and we
 And this is the results
 
 ![](/images/uploads/face-recognition-300x276.jpeg)
-
- 
 
 ## The Complete Face Recognition Code In One Piece
 
@@ -157,7 +152,7 @@ while True:
         else:
             Id="Unknown"
         cv2.cv.PutText(cv2.cv.fromarray(im),str(Id), (x,y+h),font, 255)
-    cv2.imshow('im',im) 
+    cv2.imshow('im',im)
     if cv2.waitKey(10) &amp; 0xFF==ord('q'):
         break
 cam.release()
@@ -169,8 +164,6 @@ cv2.destroyAllWindows()
 Feel Free to Subscribe my blog and my youtube channel
 
 <iframe width="600" height="400" style="width:100%;" src="https://www.youtube.com/embed/oqMTdjcrAGk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
- 
 
 ### Updates: Github links:
 

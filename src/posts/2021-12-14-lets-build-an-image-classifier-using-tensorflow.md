@@ -4,22 +4,25 @@ title: Lets Build An Image Classifier Using Tensorflow
 date: 2017-09-03T08:33:14.533Z
 category: machine learning
 featuredImage: /images/uploads/train.gif
+redirect_from:
+    - /2017/09/03/cnn-image-classifier-using-tensorflow/
 ---
+
 Previously we learned how to [prepare](https://web.archive.org/web/20210305014033/https://thecodacus.com/prepare-data-set-train-tensorflow-model/) a dataset to feed it to our TensorFlow model. So In this tutorial, we will be using the same dataset generator class that we wrote in our previous [post](https://web.archive.org/web/20210305014033/https://thecodacus.com/prepare-data-set-train-tensorflow-model/), to get data from the dataset directory. We will also learn to build an image classifier using a convolutional neural network which we will train on that dataset
 
 ## Prerequisites
 
-* Download Kaggle Cats vs Dogs [dataset](https://web.archive.org/web/20210305014033/https://www.kaggle.com/c/dogs-vs-cats/data)
-* DataSetGenerator Code that we wrote in our [earlier post](https://web.archive.org/web/20210305014033/https://thecodacus.com/prepare-data-set-train-tensorflow-model/)
+-   Download Kaggle Cats vs Dogs [dataset](https://web.archive.org/web/20210305014033/https://www.kaggle.com/c/dogs-vs-cats/data)
+-   DataSetGenerator Code that we wrote in our [earlier post](https://web.archive.org/web/20210305014033/https://thecodacus.com/prepare-data-set-train-tensorflow-model/)
 
 ## The Building Blocks
 
 To build an image recognition model we need to create some basic building blocks, these are:
 
-* Convolution Layer
-* Pooling Layer
-* Activation Layer
-* Fully Connected Layer
+-   Convolution Layer
+-   Pooling Layer
+-   Activation Layer
+-   Fully Connected Layer
 
 So we will be creating a network builder class which will be a helper class and we will add methods to create these layers. So that it will make our job easier while creating the network. I will be explaining
 
@@ -27,13 +30,13 @@ I will be explaining all the above blocks while defining them in code
 
 ## Let’s Start Coding
 
-We will start by creating the helper class, and let’s name it ***NetworkBuilder***
+We will start by creating the helper class, and let’s name it **_NetworkBuilder_**
 
 ```python
-import tensorflow as tf 
+import tensorflow as tf
 
-class NetworkBuilder: 
-    def __init__(self): 
+class NetworkBuilder:
+    def __init__(self):
         pass
 ```
 
@@ -59,31 +62,31 @@ class NetworkBuilder:
             return conv
 ```
 
-So we created a method called ***attach_conv_layer***, Let’s see the arguments we are feeding to this method.
+So we created a method called **_attach_conv_layer_**, Let’s see the arguments we are feeding to this method.
 
-The ***input_layer,*** to attach a new layer in the model we need an input layer for this new layer.
+The **_input_layer,_** to attach a new layer in the model we need an input layer for this new layer.
 
-To create a convolutional layer we need to know the ***output_size*** which is the number of output feature maps (basically the number of features we want to extract) not the number of neurons.
+To create a convolutional layer we need to know the **_output_size_** which is the number of output feature maps (basically the number of features we want to extract) not the number of neurons.
 
-***feature_size*** is the size of the kernel. Basically, it will create multiple numbers of small kernels (patches) of pixels of this particular size with some random feature drawn in it, and the layer will try to find similar patterns matching in the input image by sliding the kernel all over the image. And we create a feature map from each kernel indicating the coordinates where the kernels were matching with the input image.
+**_feature_size_** is the size of the kernel. Basically, it will create multiple numbers of small kernels (patches) of pixels of this particular size with some random feature drawn in it, and the layer will try to find similar patterns matching in the input image by sliding the kernel all over the image. And we create a feature map from each kernel indicating the coordinates where the kernels were matching with the input image.
 
-**\*strides** are* the steps we want to move in a particular direction each time we match the feature kernels with the input image i.e. \[batch step, height step, width step, channel step]
+**\*strides** are\* the steps we want to move in a particular direction each time we match the feature kernels with the input image i.e. \[batch step, height step, width step, channel step]
 
-Every time we slide a kernel over an input image the size of the generated feature map is less than the size of the input image and the size reduction depends on the size of the kernel. If we want to keep the feature image size the same as the input image we have to pad zeros at the edges. For that, we have the ***padding*** flag.
+Every time we slide a kernel over an input image the size of the generated feature map is less than the size of the input image and the size reduction depends on the size of the kernel. If we want to keep the feature image size the same as the input image we have to pad zeros at the edges. For that, we have the **_padding_** flag.
 
-The ***summary*** is just a flag to determine whether we want a summary for this layer in the tensorboard. If you don’t know how to use tensorboard I have a detailed blog on tensorboard **[here](https://web.archive.org/web/20210305014033/https://thecodacus.com/tensorboard-tutorial-visualize-networks-graphically/)**. But this is optional and not related to designing the network, it’s totally fine if you want to ignore it.
+The **_summary_** is just a flag to determine whether we want a summary for this layer in the tensorboard. If you don’t know how to use tensorboard I have a detailed blog on tensorboard **[here](https://web.archive.org/web/20210305014033/https://thecodacus.com/tensorboard-tutorial-visualize-networks-graphically/)**. But this is optional and not related to designing the network, it’s totally fine if you want to ignore it.
 
 #### Let’s see inside the method
 
 Before doing anything we started new scope and named it “Convolution”. This will help us group things while debugging them in tensorboard.
 
-To create the new **conv** layer we first need the size of the input image. or more specifically the number of channels the input image has. For an RGB image, the number of channels is 3, it’s the last axis of the input tensor. So we used ***input_layer.get_shape().as_list()\[-1]***  to get the size of the last axis, channels.
+To create the new **conv** layer we first need the size of the input image. or more specifically the number of channels the input image has. For an RGB image, the number of channels is 3, it’s the last axis of the input tensor. So we used **_input_layer.get_shape().as_list()\[-1]_**  to get the size of the last axis, channels.
 
-After that, we created the weights for the **conv** layer. weights for conv layer should be in this shape ***\[kernal height, kernel weight, input channel size, output channels ].***  we used ***tf.random_normal***  to initialize a random weight matrix and then used ***tf.Variable*** to convert it to a tensorflow variable.
+After that, we created the weights for the **conv** layer. weights for conv layer should be in this shape **_\[kernal height, kernel weight, input channel size, output channels ]._**  we used **_tf.random_normal_**  to initialize a random weight matrix and then used **_tf.Variable_** to convert it to a tensorflow variable.
 
 Next (optional) we checked the summary flag and used the summary writer to add a summary for the tensorboard
 
-Then we created the bias neurons, and used ***tf.nn.conv2d*** to create a convolutional layer, we added the bias neurons with the conv2d output, and we get the final conv layer.
+Then we created the bias neurons, and used **_tf.nn.conv2d_** to create a convolutional layer, we added the bias neurons with the conv2d output, and we get the final conv layer.
 
 ## The Pooling Layer
 
@@ -98,21 +101,19 @@ class NetworkBuilder:
             return tf.nn.max_pool(input_layer, ksize=ksize, strides=strides, padding=padding)
 ```
 
-
-
-So in pooling, we need input_layer just like the previous method and the strides as well as the padding as arguments. we also need another parameter called ***ksize.***
+So in pooling, we need input_layer just like the previous method and the strides as well as the padding as arguments. we also need another parameter called **_ksize._**
 
 Like the previous method, we opened a scope named “Pooling”.
 
-The ***ksize*** is the pooling size, which means how many pixels will be converted to one pixel in each direction. It should be in this format \[batch, height, width, channel]. We don’t want to merge any pixels from the batch and channel axis. So for default, we put 1 in those positions and 2 in both height and width positions. So with the default parameters, the pooled image will be half of the input image in height and width.
+The **_ksize_** is the pooling size, which means how many pixels will be converted to one pixel in each direction. It should be in this format \[batch, height, width, channel]. We don’t want to merge any pixels from the batch and channel axis. So for default, we put 1 in those positions and 2 in both height and width positions. So with the default parameters, the pooled image will be half of the input image in height and width.
 
 We are also moving 2 steps in height and width, and the padding is the same so that the size remains the same during the kernel sliding.
 
-We used ***tf.nn.max_pool***  to create the pooling layer and put the arguments and return it
+We used **_tf.nn.max_pool_**  to create the pooling layer and put the arguments and return it
 
 ## Activation Layer
 
-We need some activation layer to add nonlinearity in our network otherwise the network won’t be able to learn complex functions. We will define ***relu, sigmoid & softmax***, these three activation functions. let’s define them
+We need some activation layer to add nonlinearity in our network otherwise the network won’t be able to learn complex functions. We will define **_relu, sigmoid & softmax_**, these three activation functions. let’s define them
 
 ```python
 class NetworkBuilder:
@@ -135,11 +136,9 @@ So here are the three methods I think these are self-explanatory and no further 
 
 ## Fully Connected Layer
 
-Till now we were working with images, or feature maps which are also an image in some form, and all are 3D in shape excluding the batch axis but the fully connected layer only works with 1D so we have to convert that 3d input to flat 1D input. For that reason, we need another method. We will be calling it "***flatten"***
+Till now we were working with images, or feature maps which are also an image in some form, and all are 3D in shape excluding the batch axis but the fully connected layer only works with 1D so we have to convert that 3d input to flat 1D input. For that reason, we need another method. We will be calling it "**_flatten"_**
 
 #### Flatten Layer
-
-
 
 ```python
 class NetworkBuilder:
@@ -152,11 +151,7 @@ class NetworkBuilder:
             return tf.reshape(input_layer, [-1, new_size])
 ```
 
-
-
-So in the above code, we have given the scope name Flatten and calculated the total number of neurons (representing each pixel value) in the input layer excluding the batch axis. So, the total number of neurons will be ***(number of neurons along the height axis) x (number of neurons along the width axis) x (number of neurons along the channels axis)***. which is basically the last 3 axis in the input layer. Now if we multiply them we get a number and that will be the new size of the 1D vector for our fully connected layer. So now we reshape the input layer to \[batchsize, newsize] where -1 is for batch size which means it can take any value and that’s our flattened layer of features ready to be classified by a fully connected layer.
-
-
+So in the above code, we have given the scope name Flatten and calculated the total number of neurons (representing each pixel value) in the input layer excluding the batch axis. So, the total number of neurons will be **_(number of neurons along the height axis) x (number of neurons along the width axis) x (number of neurons along the channels axis)_**. which is basically the last 3 axis in the input layer. Now if we multiply them we get a number and that will be the new size of the 1D vector for our fully connected layer. So now we reshape the input layer to \[batchsize, newsize] where -1 is for batch size which means it can take any value and that’s our flattened layer of features ready to be classified by a fully connected layer.
 
 #### Finally The Fully Connected (Dense) Layer
 
@@ -177,17 +172,11 @@ class NetworkBuilder:
             return dense
 ```
 
-
-
-So it’s as I already said, it's the same as the previous tutorials, we get the size of the input layer which is a 1D layer so we only need the last axis. we are not interested in the batch length (most of the time we are never interested in batch length). We created the weights with input and output size we created the bias neurons. then we did a ***matmul*** with the input layer, added the biases and we are done with a fully connected layer named dense (it’s called dense sometimes).
-
-
+So it’s as I already said, it's the same as the previous tutorials, we get the size of the input layer which is a 1D layer so we only need the last axis. we are not interested in the batch length (most of the time we are never interested in batch length). We created the weights with input and output size we created the bias neurons. then we did a **_matmul_** with the input layer, added the biases and we are done with a fully connected layer named dense (it’s called dense sometimes).
 
 ## This Is The Final Network Builder Class
 
 We completed the network builder class the whole code should be like this
-
-
 
 ```python
 class NetworkBuilder:
@@ -238,21 +227,17 @@ class NetworkBuilder:
             return dense
 ```
 
-
-
 ## So What is Next?
 
 We completed the network builder class, so now what? remember our original goal was to build a network. We need to do the following steps before building our first CNN network
 
-* So let’s save this code in a file named exactly as the class name. which is ***NetworkBuilder.py***
-* We will need the dataset Generator class that we wrote in the [earlier tutorial](https://web.archive.org/web/20210305014033/https://thecodacus.com/prepare-data-set-train-tensorflow-model). Save that code in another file with the same file name as the dataset generator class, which was ***DataSetGenerator.py***
-* Put both of the files in the same.
-* Unzip the Cat vs Dog [train.zip](https://web.archive.org/web/20210305014033/https://www.kaggle.com/c/dogs-vs-cats/data) in the same directory in the train folder
-* Create a new python file and let’s name it ***MyFirstCNNModel.py***
+-   So let’s save this code in a file named exactly as the class name. which is **_NetworkBuilder.py_**
+-   We will need the dataset Generator class that we wrote in the [earlier tutorial](https://web.archive.org/web/20210305014033/https://thecodacus.com/prepare-data-set-train-tensorflow-model). Save that code in another file with the same file name as the dataset generator class, which was **_DataSetGenerator.py_**
+-   Put both of the files in the same.
+-   Unzip the Cat vs Dog [train.zip](https://web.archive.org/web/20210305014033/https://www.kaggle.com/c/dogs-vs-cats/data) in the same directory in the train folder
+-   Create a new python file and let’s name it **_MyFirstCNNModel.py_**
 
 So after these steps, your working folder should look something like this
-
-
 
 ![folder structure](/images/uploads/screen-shot-2017-09-01-at-11.22.10-pm.webp)
 
@@ -263,15 +248,15 @@ Let’s open the new file myFirstCNNModel.py and start building our model.
 #### Importing libraries
 
 ```python
-import tensorflow as tf 
-from NetworkBuilder import NetworkBuilder 
+import tensorflow as tf
+from NetworkBuilder import NetworkBuilder
 from DataSetGenerator import DataSetGenerator,seperateData
-import datetime 
-import numpy as np 
+import datetime
+import numpy as np
 import os
 ```
 
-These are the libraries that we are going to use. The ***NetworkBuilder***, ***DataSetGenerator,***  and  ***seperateData***  are libraries that we wrote ourselves
+These are the libraries that we are going to use. The **_NetworkBuilder_**, **_DataSetGenerator,_**  and  **_seperateData_**  are libraries that we wrote ourselves
 
 #### Now let’s create the placeholders
 
@@ -354,8 +339,6 @@ And this is the model after expanding it (sorry I had to rotate it to fit it in 
 [![tensorboard visualization of image classifier model only](https://web.archive.org/web/20210305014033im_/https://i1.wp.com/142.93.251.188/wp-content/uploads/2017/09/model.png?resize=2048%2C267)](https://web.archive.org/web/20210305014033/https://thecodacus.com/cnn-image-classifier-using-tensorflow/model/)
 
 TensorBoard visualization of image classifier model only
-
-
 
 ## We completed The CNN Image Classifier Model, let’s train it
 
@@ -502,8 +485,6 @@ with tf.Session() as sess:
                 saver.save(sess, model_save_path+model_name, global_step=steps)
 ```
 
- 
-
 ## Some Advanced Modifications
 
 I added one extra method in the network builder class to create similar modules as we have in the inception model by google.
@@ -548,8 +529,6 @@ class NetworkBuilder:
 and this is how it looks like in TensorBoar
 
 ![Implemented Inceptio Module](/images/uploads/screen-shot-2017-09-03-at-11.30.33-pm.webp "Implemented Inceptio Module")
-
-
 
 ## Limitations of our Image Classifier
 

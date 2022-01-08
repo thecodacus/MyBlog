@@ -4,7 +4,10 @@ title: Gesture Recognition Virtual Mouse Using OpenCV
 date: 2017-08-17T13:47:51.545Z
 category: computer vision
 featuredImage: /images/uploads/guesture-recognition-technology-blog-feature-image.jpeg
+redirect_from:
+    - /2017/08/16/gesture-recognition-virtual-mouse-using-opencv-python/
 ---
+
 In My Last OpenCV tutorial, I wrote a program to detect green objects and track them. In this post, I am going to show you how we can extend that idea to do some more things like gesture recognition. We will apply that to create a virtual mouse.
 
 I will be using that code as a base of this program and will work on top of it. So if you haven’t read the previous tutorial you can check it [here ](https://web.archive.org/web/20210128044644/https://thecodacus.com/opencv-object-tracking-colour-detection-python/)
@@ -13,12 +16,10 @@ I will be using that code as a base of this program and will work on top of it. 
 
 The external libraries that we will be using:
 
-* OpenCV
-* NumPy
-* wx
-* pynput
-
- 
+-   OpenCV
+-   NumPy
+-   wx
+-   pynput
 
 ## Let's Take a Look Back At The Colour Detection Code
 
@@ -51,7 +52,7 @@ while True:
 
     maskFinal=maskClose
     conts,h=cv2.findContours(maskFinal.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
-    
+
     cv2.drawContours(img,conts,-1,(255,0,0),3)
     for i in range(len(conts)):
         x,y,w,h=cv2.boundingRect(conts[i])
@@ -63,8 +64,6 @@ while True:
     cv2.imshow("cam",img)
     cv2.waitKey(10)
 ```
-
- 
 
 ## Let's Create a Virtual Mouse with Gesture Recognition
 
@@ -79,9 +78,7 @@ from pynput.mouse import Button, Controller
 import wx
 ```
 
- 
-
-These are the libraries that we will be using. ***pynput*** to control mouse movements and clicking and ***wx*** to get the display resolution of the monitor
+These are the libraries that we will be using. **_pynput_** to control mouse movements and clicking and **_wx_** to get the display resolution of the monitor
 
 #### Global variables Setup
 
@@ -94,13 +91,9 @@ app=wx.App(False)
 (camx,camy)=(320,240)
 ```
 
- 
+we will need these variables and objects, mouse object is for mouse movements and to get the screen resolution we need a **_wx_** app then we can use them **_`wx.GetDisplaySize()`_** to get the screen resolution.
 
-we will need these variables and objects, mouse object is for mouse movements and to get the screen resolution we need a ***wx*** app then we can use them ***`wx.GetDisplaySize()`*** to get the screen resolution.
-
-lastly, we are setting some variables ***camx***, ***camy*** to set the captured image resolution. we will be using it later in the image resize function
-
- 
+lastly, we are setting some variables **_camx_**, **_camy_** to set the captured image resolution. we will be using it later in the image resize function
 
 ## Let's Start The Main Loop
 
@@ -136,11 +129,9 @@ while True:
         # logic for close gesture
         ....
         ....
-    cv2.imshow("cam",img) 
+    cv2.imshow("cam",img)
     cv2.waitKey(5)
 ```
-
- 
 
 Above is the structure of our extended code. after getting the contours in conts variable we will check if there are contours of 2 objects present in the frame we will move the mouse but we won't perform any click operation
 
@@ -178,11 +169,9 @@ while True:
         cy=(cy1+cy2)/2
         # Drawing the line
         cv2.line(img, (cx1,cy1),(cx2,cy2),(255,0,0),2)
-        # Drawing the point (red dot) 
+        # Drawing the point (red dot)
         cv2.circle(img, (cx,cy),2,(0,0,255),2)
 ```
-
- 
 
 So the above code is the result of what I just explained earlier and with this, we have the coordinate to position our mouse cursor
 
@@ -197,16 +186,12 @@ while True:
         :
         mouse.release(Button.left)
         mouseLoc=(sx-(cx*sx/camx), cy*sy/camy)
-        mouse.position=mouseLoc 
-        while mouse.position!=mouseLoc: 
+        mouse.position=mouseLoc
+        while mouse.position!=mouseLoc:
             pass
 ```
 
- 
-
 In the above code first, we are doing a mouse release to ensure the mouse left button is not pressed. Then we are converting the detected coordinate from camera resolution to the actual screen resolution. After that, we set the location as the **mouse.position**. but to move the mouse it will take time for the curser so we have to wait till the curser reaches that point. So we started a loop and we are not doing anything there we are just waiting will the current mouse location is the same as the assigned mouse location, that is for the open gesture
-
- 
 
 #### Implement Close Gesture/ Clicking
 
@@ -221,16 +206,16 @@ while True:
         :
     elif(len(conts)==1):
         x,y,w,h=cv2.boundingRect(conts[0])
-        #drawing the rectangle 
+        #drawing the rectangle
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
         cx=x+w/2
         cy=y+h/2
         cv2.circle(img,(cx,cy),(w+h)/4,(0,0,255),2)
-        
+
         mouse.press(Button.left)
         mouseLoc=(sx-(cx*sx/camx), cy*sy/camy)
-        mouse.position=mouseLoc 
-        while mouse.position!=mouseLoc: 
+        mouse.position=mouseLoc
+        while mouse.position!=mouseLoc:
             pass
 ```
 
@@ -244,13 +229,11 @@ This is the result :
 
 Close Gesture
 
- 
-
 ## Some Fine Tuning
 
-We are almost done. The code is almost perfect except. we won't be able to drag anything. because in close gesture we are continuously performing ***mouse.press*** operation which will result in continuous multiple clicks while dragging.
+We are almost done. The code is almost perfect except. we won't be able to drag anything. because in close gesture we are continuously performing **_mouse.press_** operation which will result in continuous multiple clicks while dragging.
 
-To solve this problem what we can do is, we will be putting a flag called “***pinchFlag***” and we will set that ***1*** once we perform a click operation. and we won't perform mouse press operation anymore until the flag is ***0*** again
+To solve this problem what we can do is, we will be putting a flag called “**_pinchFlag_**” and we will set that **_1_** once we perform a click operation. and we won't perform mouse press operation anymore until the flag is **_0_** again
 
 so the code will look like this
 
@@ -262,28 +245,24 @@ while True:
     if(len(conts)==2):
         :
         :
-        if(pinchFlag==1): #perform only if pinch is on 
+        if(pinchFlag==1): #perform only if pinch is on
             pinchFlag=0 # setting pinch flag off
             mouse.release(Button.left)
         mouseLoc=(sx-(cx*sx/camx), cy*sy/camy)
-        mouse.position=mouseLoc 
-        while mouse.position!=mouseLoc: 
+        mouse.position=mouseLoc
+        while mouse.position!=mouseLoc:
             pass
     elif(len(conts)==1):
         :
-        :      
+        :
         if(pinchFlag==0): #perform only if pinch is off
             pinchFlag=1 # setting pinch flag on
-            mouse.press(Button.left) 
+            mouse.press(Button.left)
         mouseLoc=(sx-(cx*sx/camx), cy*sy/camy)
-        mouse.position=mouseLoc 
-        while mouse.position!=mouseLoc: 
+        mouse.position=mouseLoc
+        while mouse.position!=mouseLoc:
             pass
 ```
-
- 
-
- 
 
 ## Final Code For Virtual Mouse with Gesture Recognition
 
@@ -343,7 +322,7 @@ while True:
         cv2.line(img, (cx1,cy1),(cx2,cy2),(255,0,0),2)
         cv2.circle(img, (cx,cy),2,(0,0,255),2)
         mouseLoc=(sx-(cx*sx/camx), cy*sy/camy)
-        mouse.position=mouseLoc 
+        mouse.position=mouseLoc
         while mouse.position!=mouseLoc:
             pass
     elif(len(conts)==1):
@@ -356,17 +335,13 @@ while True:
         cy=y+h/2
         cv2.circle(img,(cx,cy),(w+h)/4,(0,0,255),2)
         mouseLoc=(sx-(cx*sx/camx), cy*sy/camy)
-        mouse.position=mouseLoc 
+        mouse.position=mouseLoc
         while mouse.position!=mouseLoc:
             pass
     cv2.imshow("cam",img)
     cv2.waitKey(5)
 ```
 
- 
-
 ## Virtual Mouse with Gesture Recognition Video Tutor
-
- 
 
 [Simple Gesture Recognition To Create Virtual Mouse | using OpenCV and Python (Tutorial) Part 1](https://web.archive.org/web/20210128044644if_/https://www.youtube.com/embed/DTkvaYRX8o0?feature=oembed)

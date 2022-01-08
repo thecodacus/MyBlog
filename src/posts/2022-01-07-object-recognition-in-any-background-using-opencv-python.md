@@ -4,12 +4,13 @@ title: Object Recognition In Any Background Using OpenCV Python
 date: 2017-03-26T16:35:45.601Z
 category: computer vision
 featuredImage: /images/uploads/detected-with-yolo-schreibtisch-mit-objekten.jpeg
+redirect_from:
+    - /2017/03/26/object-recognition-using-opencv-python/
 ---
+
 In my previous posts we learnt how to use classifiers to do [Face Detection](https://web.archive.org/web/20201125043415/https://thecodacus.com/opencv-python-face-detection/) and how to create a [dataset](https://web.archive.org/web/20201125043415/https://thecodacus.com/opencv-face-recognition-python-part1/) to [train](https://web.archive.org/web/20201125043415/https://thecodacus.com/face-recognition-opencv-train-recognizer/) a and [use](https://web.archive.org/web/20201125043415/https://thecodacus.com/face-recognition-loading-recognizer/) it for Face Recognition, in this post we are will looking at how to do Object Recognition to recognize an object in an image ( for example a book), using SIFT/SURF Feature extractor and Flann based KNN matcher,
 
 Many of you already asked me for a tutorial on this, So here it is
-
- 
 
 ## Lets Do Object Recognition
 
@@ -78,7 +79,7 @@ while True:
     matches=flann.knnMatch(queryDesc,trainDesc,k=2)
 ```
 
-In the above code, we first captured a frame from the camera, then converted it to gray scale, then we extracted the features like we did in the training image,after that we used the ***flann*** feature matcher to match the features in both images, and stored the matches results in ***matches*** variable
+In the above code, we first captured a frame from the camera, then converted it to gray scale, then we extracted the features like we did in the training image,after that we used the **_flann_** feature matcher to match the features in both images, and stored the matches results in **_matches_** variable
 
 here flann is using knn to match the features with k=2, so we will get 2 neighbors
 
@@ -91,9 +92,9 @@ goodMatch=[]
             goodMatch.append(m)
 ```
 
-In the above code we created an empty list named ***goodMatch***  and the we are checking distance from the most neatest neighbor m and the next neatest neighbor n, and we are considering the match is a good match if the distance from point ***“m”*** is less the 70% of the distance on point “***n***” and appending that point to ***“goodMatch”*** 
+In the above code we created an empty list named **_goodMatch_**  and the we are checking distance from the most neatest neighbor m and the next neatest neighbor n, and we are considering the match is a good match if the distance from point **_“m”_** is less the 70% of the distance on point “**_n_**” and appending that point to **_“goodMatch”_**
 
-We also need to make sure that we have enough feature matches to call these a match, for that we are going to set a threshold “***MIN_MATCH_COUNT***” and if the number of matches are greater than then value then only we are going to consider them as match
+We also need to make sure that we have enough feature matches to call these a match, for that we are going to set a threshold “**_MIN_MATCH_COUNT_**” and if the number of matches are greater than then value then only we are going to consider them as match
 
 ```python
     MIN_MATCH_COUNT=30
@@ -130,8 +131,6 @@ Now using the transformation constant “H” that we got from earlier we will t
 finally we are using “cv2.polylines()” to draw the borders in the query image
 
 Lastly if the number of features are less that the minimum match counts then we are going to print it in the screen in the else part
-
- 
 
 Now lets display the image, and close the window if loop ends
 
@@ -191,11 +190,9 @@ cam.release()
 cv2.destroyAllWindows()
 ```
 
- 
-
 ## Complete Video Guide
 
- <iframe width="750" height="480"  style="width:100%;" src="https://www.youtube.com/embed/vwEdmG0q8UI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="750" height="480"  style="width:100%;" src="https://www.youtube.com/embed/vwEdmG0q8UI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ### Updates: Github links:
 

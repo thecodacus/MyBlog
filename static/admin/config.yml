@@ -19,7 +19,8 @@ collections:
       create: true # Allow users to create new documents in this collection
       slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
       fields: # The fields for each document, usually in front matter
-          - { label: "Layout", name: "layout", widget: "hidden", default: "blog" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "blog" },
+          - { label: "RedirectFrom", name: "redirect_from", widget: "hidden", default: [] },
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Publish Date", name: "date", widget: "datetime" }
           - label: "Category"
@@ -28,6 +29,5 @@ collections:
             # multiple: true
             min: 1
             options: ["machine learning", "blockchain", "computer vision", "general coding"]
-
           - { label: "Featured Image", name: "featuredImage", widget: "image" }
           - { label: "Body", name: "body", widget: "markdown" }
