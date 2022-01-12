@@ -2,8 +2,6 @@ import React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import * as styles from "../styles/post-details.module.scss"
 
-import markdownIt from "markdown-it"
-// import markdownItKatex from "@iktakahiro/markdown-it-katex"
 export default function Article({ html, bodyWidget, title, category, featuredImage, date, publicURL, children }) {
 	const featuredImagePath = publicURL
 	return (
