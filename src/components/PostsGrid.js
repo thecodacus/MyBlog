@@ -6,7 +6,7 @@ export default function PostsGrid({ posts }) {
 	return (
 		<div className={styles.posts}>
 			{posts.map(post => (
-				<article className={styles.card} style={{ height: "fit-content" }} key={post.id}>
+				<article className={styles.card} style={{}} key={post.id}>
 					<div className={styles.thumbnail}>
 						{post.frontmatter.featuredImage?.childImageSharp != null ? (
 							<GatsbyImage image={getImage(post.frontmatter.featuredImage)} alt={post.frontmatter.title} />
